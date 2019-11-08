@@ -172,6 +172,56 @@ namespace pianokeys
                 frameDataGridView.Rows[i].HeaderCell.Value = i.ToString();
             }
         }
+
+        private void fileInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO Show a form with info about the loaded file
+            
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO Pick somewhere else to save a file
+        }
+
+        private void gridContextMenu_Opening_1(object sender, CancelEventArgs e)
+        {
+            bool shouldEnable = (frameDataGridView.SelectedCells.Count > 0);
+
+            copyFramesToolStripMenuItem.Enabled = shouldEnable;
+            pasteToolStripMenuItem.Enabled = shouldEnable;
+            insertAfterMenuItem.Enabled = shouldEnable;
+            insertBeforeMenuItem.Enabled = shouldEnable;
+            insertMultipleMenuItem.Enabled = shouldEnable;
+            deleteMenuItem.Enabled = shouldEnable;
+            clearSelectedValuesToolStripMenuItem.Enabled = shouldEnable;
+
+
+            if (gridContextMenu.Parent == frameDataGridView)
+            {
+                gridContextMenu.Show(this, frameDataGridView.PointToClient(Cursor.Position));
+            }
+        }
+
+        private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewCell cell in frameDataGridView.SelectedCells)
+            {
+                if (cell.ValueType == typeof(bool))
+                {
+                    cell.Value = false;
+                }
+                else if (cell.ValueType == typeof(byte))
+                {
+                    var columnName = cell.OwningColumn.Name;
+                    if (columnName[1] == 'P')
+                        cell.Value = 0;
+                    else
+                        cell.Value = 128;
+                }
+            }
+
+        }
     }
 
 }

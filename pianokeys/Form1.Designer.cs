@@ -120,6 +120,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.clearSelectedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
@@ -157,8 +158,9 @@
             // frameDataGridView
             // 
             this.frameDataGridView.AllowUserToOrderColumns = true;
+            this.frameDataGridView.AllowUserToResizeColumns = false;
             this.frameDataGridView.AllowUserToResizeRows = false;
-            this.frameDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.frameDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.frameDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ST,
             this.A,
@@ -410,10 +412,12 @@
             this.insertBeforeMenuItem,
             this.insertAfterMenuItem,
             this.insertMultipleMenuItem,
-            this.deleteMenuItem});
+            this.deleteMenuItem,
+            this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
             this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(194, 186);
+            this.gridContextMenu.Size = new System.Drawing.Size(194, 230);
+            this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
             // 
@@ -524,12 +528,14 @@
             | System.Windows.Forms.Keys.S)));
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // fileInfoToolStripMenuItem
             // 
             this.fileInfoToolStripMenuItem.Name = "fileInfoToolStripMenuItem";
             this.fileInfoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.fileInfoToolStripMenuItem.Text = "File Info";
+            this.fileInfoToolStripMenuItem.Text = "File Properties";
+            this.fileInfoToolStripMenuItem.Click += new System.EventHandler(this.fileInfoToolStripMenuItem_Click);
             // 
             // undoToolStripMenuItem
             // 
@@ -1241,6 +1247,13 @@
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.TabIndex = 8;
             // 
+            // clearSelectedValuesToolStripMenuItem
+            // 
+            this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
+            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
+            this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
+            // 
             // activeFrameBindingSource
             // 
             this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
@@ -1389,6 +1402,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileInfoToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStripMenuItem clearSelectedValuesToolStripMenuItem;
     }
 }
 
