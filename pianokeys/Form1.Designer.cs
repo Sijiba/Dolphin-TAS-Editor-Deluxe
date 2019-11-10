@@ -60,11 +60,13 @@
             this.redoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteAfterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.insertBeforeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertAfterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertMultipleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearSelectedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +74,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bookmarkFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedFrameBox = new System.Windows.Forms.GroupBox();
@@ -120,7 +125,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.clearSelectedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
@@ -408,6 +413,7 @@
             this.redoToolStripMenuItem1,
             this.copyFramesToolStripMenuItem,
             this.pasteToolStripMenuItem,
+            this.pasteAfterToolStripMenuItem,
             this.toolStripSeparator1,
             this.insertBeforeMenuItem,
             this.insertAfterMenuItem,
@@ -416,65 +422,89 @@
             this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
             this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(194, 230);
+            this.gridContextMenu.Size = new System.Drawing.Size(205, 252);
             this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(193, 22);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
+            this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
             // redoToolStripMenuItem1
             // 
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(193, 22);
+            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
             this.redoToolStripMenuItem1.Text = "Redo";
+            this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
             // copyFramesToolStripMenuItem
             // 
             this.copyFramesToolStripMenuItem.Name = "copyFramesToolStripMenuItem";
             this.copyFramesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.copyFramesToolStripMenuItem.Text = "Copy Frame(s)";
+            this.copyFramesToolStripMenuItem.Click += new System.EventHandler(this.copyFramesToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.pasteToolStripMenuItem.Text = "Paste Before";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteBeforeToolStripMenuItem_Click);
+            // 
+            // pasteAfterToolStripMenuItem
+            // 
+            this.pasteAfterToolStripMenuItem.Name = "pasteAfterToolStripMenuItem";
+            this.pasteAfterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.pasteAfterToolStripMenuItem.Text = "Paste After";
+            this.pasteAfterToolStripMenuItem.Click += new System.EventHandler(this.pasteAfterToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
             // 
             // insertBeforeMenuItem
             // 
             this.insertBeforeMenuItem.Name = "insertBeforeMenuItem";
-            this.insertBeforeMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.insertBeforeMenuItem.Size = new System.Drawing.Size(204, 22);
             this.insertBeforeMenuItem.Text = "Insert Frame Before";
+            this.insertBeforeMenuItem.Click += new System.EventHandler(this.insertBeforeMenuItem_Click);
             // 
             // insertAfterMenuItem
             // 
             this.insertAfterMenuItem.Name = "insertAfterMenuItem";
-            this.insertAfterMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.insertAfterMenuItem.Size = new System.Drawing.Size(204, 22);
             this.insertAfterMenuItem.Text = "Insert Frame After";
+            this.insertAfterMenuItem.Click += new System.EventHandler(this.insertAfterMenuItem_Click);
             // 
             // insertMultipleMenuItem
             // 
             this.insertMultipleMenuItem.Name = "insertMultipleMenuItem";
-            this.insertMultipleMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.insertMultipleMenuItem.Size = new System.Drawing.Size(204, 22);
             this.insertMultipleMenuItem.Text = "Insert Frames...";
+            this.insertMultipleMenuItem.Click += new System.EventHandler(this.insertMultipleMenuItem_Click);
             // 
             // deleteMenuItem
             // 
             this.deleteMenuItem.Name = "deleteMenuItem";
-            this.deleteMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.deleteMenuItem.Text = "Delete Selected Frame";
+            this.deleteMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.deleteMenuItem.Text = "Delete Selected Frame(s)";
+            this.deleteMenuItem.Click += new System.EventHandler(this.deleteMenuItem_Click);
+            // 
+            // clearSelectedValuesToolStripMenuItem
+            // 
+            this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
+            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
+            this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -487,7 +517,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(786, 24);
@@ -504,7 +535,6 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
@@ -536,6 +566,29 @@
             this.fileInfoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.fileInfoToolStripMenuItem.Text = "File Properties";
             this.fileInfoToolStripMenuItem.Click += new System.EventHandler(this.fileInfoToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bookmarkFrameToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // bookmarkFrameToolStripMenuItem
+            // 
+            this.bookmarkFrameToolStripMenuItem.CheckOnClick = true;
+            this.bookmarkFrameToolStripMenuItem.Name = "bookmarkFrameToolStripMenuItem";
+            this.bookmarkFrameToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.bookmarkFrameToolStripMenuItem.Text = "Bookmark Frame";
+            this.bookmarkFrameToolStripMenuItem.Click += new System.EventHandler(this.bookmarkFrameToolStripMenuItem_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.removeToolStripMenuItem.Text = "View Bookmark List";
             // 
             // undoToolStripMenuItem
             // 
@@ -1224,7 +1277,9 @@
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "dtm";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // splitContainer1
@@ -1247,12 +1302,10 @@
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.TabIndex = 8;
             // 
-            // clearSelectedValuesToolStripMenuItem
+            // saveFileDialog1
             // 
-            this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
-            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
-            this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
+            this.saveFileDialog1.DefaultExt = "dtm";
+            this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
             // activeFrameBindingSource
             // 
@@ -1267,7 +1320,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Dolphin DTM Editor Deluxe";
+            this.Text = "DTM Editor Deluxe";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).EndInit();
             this.gridContextMenu.ResumeLayout(false);
@@ -1403,6 +1456,11 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStripMenuItem clearSelectedValuesToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bookmarkFrameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteAfterToolStripMenuItem;
     }
 }
 

@@ -24,6 +24,8 @@ namespace pianokeys
         BindingList<Frame> frameList;
         DTM loadedFile;
 
+        List<DataGridViewRow> bookmarkedRows;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace pianokeys
             activeFrameBindingSource.Add(t);
             frameList = new BindingList<Frame>();
             loadedFile = null;
-            
+            bookmarkedRows = new List<DataGridViewRow>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,12 +50,7 @@ namespace pianokeys
             Frame activeFrame = frameList[row];
             showActiveFrame(activeFrame, row);
         }
-
-        private void gridContextMenu_Opening(object sender, CancelEventArgs e)
-        {
-            
-        }
-
+        
         private void SliderValueChanged(object sender, EventArgs e)
         {
             activeFrameBindingSource.EndEdit();
@@ -71,15 +68,24 @@ namespace pianokeys
             activeFrameBindingSource.ResetCurrentItem();
         }
 
-
-        private void dataGridSelectionChanged(object sender, EventArgs e)
+        private HashSet<int> getSelectedRowsFromCells()
         {
-            //If only one frame is selected, set it as the active display frame
-            //else disable upper panel
-            bool enableActivePanel = true;
-            
-            DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
-            
+            var selection = frameDataGridView.SelectedCells;
+            HashSet<int> selectedRowList = new HashSet<int>();
+            foreach (DataGridViewCell selectedThing in selection)
+            {
+                int index = selectedThing.OwningRow.Index;
+                if (index < frameDataGridView.Rows.Count - 1)
+                selectedRowList.Add(index);
+            }
+            return selectedRowList;
+        }
+
+        private int singleSelectedRow(DataGridViewSelectedCellCollection selection)
+        {
+            if (selection.Count <= 0)
+                return -1;
+
             HashSet<int> selectedRowList = new HashSet<int>();
             foreach (DataGridViewCell selectedThing in selection)
             {
@@ -89,17 +95,26 @@ namespace pianokeys
             if (selectedRowList.Count == 1)
             {
                 var firstRow = frameDataGridView.Rows[selectedRowList.First()].Index;
+                return firstRow;
+            }
+            //otherwise invalid
+            return -1;
+        }
 
-                if (firstRow < frameDataGridView.RowCount - 1)
-                {
-                    Frame activeFrame = frameList.ElementAt(firstRow);
-                    showActiveFrame(activeFrame, firstRow);
-                    enableActivePanel = true;
-                }
-                else
-                {
-                    enableActivePanel = false;
-                }
+
+        private void dataGridSelectionChanged(object sender, EventArgs e)
+        {
+            //If only one frame is selected, set it as the active display frame
+            //else disable upper panel
+            bool enableActivePanel = true;
+            
+            DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
+            int row = singleSelectedRow(selection);
+            if (row != -1)
+            {
+                Frame activeFrame = frameList.ElementAt(row);
+                showActiveFrame(activeFrame, row);
+                enableActivePanel = true;
             }
             else
             {
@@ -109,13 +124,11 @@ namespace pianokeys
             selectedFrameBox.Enabled = enableActivePanel;
         }
         
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
+        
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
+            //TODO Load adjacent bookmarks file if present
             DTM inputFile = null;
             try
             {
@@ -145,6 +158,12 @@ namespace pianokeys
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFile(loadedFile.FilePath);
+        }
+        
+        private void saveFile(string path)
+        {
+            //TODO Save adjacent bookmarks file if present
             if (loadedFile != null)
             {
                 loadedFile.ControllerData.Clear();
@@ -152,10 +171,10 @@ namespace pianokeys
                 {
                     loadedFile.ControllerData.Add(Frame.MakeFileDatum(frame));
                 }
-                loadedFile.Save(loadedFile.FilePath);
+                loadedFile.Save(path);
+                loadedFile.FilePath = path;
             }
         }
-        
 
         private void frameDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
@@ -181,20 +200,29 @@ namespace pianokeys
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO Pick somewhere else to save a file
+            // Pick somewhere else to save a file
+            var result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                saveFile(saveFileDialog1.FileName);
+            }
+
         }
 
         private void gridContextMenu_Opening_1(object sender, CancelEventArgs e)
         {
-            bool shouldEnable = (frameDataGridView.SelectedCells.Count > 0);
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
 
-            copyFramesToolStripMenuItem.Enabled = shouldEnable;
-            pasteToolStripMenuItem.Enabled = shouldEnable;
-            insertAfterMenuItem.Enabled = shouldEnable;
-            insertBeforeMenuItem.Enabled = shouldEnable;
-            insertMultipleMenuItem.Enabled = shouldEnable;
-            deleteMenuItem.Enabled = shouldEnable;
-            clearSelectedValuesToolStripMenuItem.Enabled = shouldEnable;
+            bool singleRowSelected = selectedRowList.Count == 1;
+            bool anyRowsSelected = selectedRowList.Count > 0;
+
+            copyFramesToolStripMenuItem.Enabled = anyRowsSelected;
+            pasteToolStripMenuItem.Enabled = anyRowsSelected;
+            insertAfterMenuItem.Enabled = anyRowsSelected;
+            insertBeforeMenuItem.Enabled = anyRowsSelected;
+            insertMultipleMenuItem.Enabled = anyRowsSelected;
+            deleteMenuItem.Enabled = anyRowsSelected;
+            clearSelectedValuesToolStripMenuItem.Enabled = anyRowsSelected;
 
 
             if (gridContextMenu.Parent == frameDataGridView)
@@ -205,23 +233,108 @@ namespace pianokeys
 
         private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewCell cell in frameDataGridView.SelectedCells)
+            var selection = frameDataGridView.SelectedCells;
+            if (singleSelectedRow(selection) != -1)
             {
-                if (cell.ValueType == typeof(bool))
+                foreach (DataGridViewCell cell in selection)
                 {
-                    cell.Value = false;
-                }
-                else if (cell.ValueType == typeof(byte))
-                {
-                    var columnName = cell.OwningColumn.Name;
-                    if (columnName[1] == 'P')
-                        cell.Value = 0;
-                    else
-                        cell.Value = 128;
+                    if (cell.ValueType == typeof(bool))
+                    {
+                        cell.Value = false;
+                    }
+                    else if (cell.ValueType == typeof(byte))
+                    {
+                        var columnName = cell.OwningColumn.Name;
+                        if (columnName[1] == 'P')
+                            cell.Value = 0;
+                        else
+                            cell.Value = 128;
+                    }
                 }
             }
 
         }
+
+        private void insertBeforeMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO insert before
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+        }
+
+        private void insertAfterMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO insert after
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+        }
+
+        private void insertMultipleMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO prompt for a number of rows and whether to add them before or
+            // after the selected row(s)
+        }
+
+        private void deleteMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO delete row 
+            var selectedRowList = getSelectedRowsFromCells();
+            var toDelete = new List<DataGridViewRow>();
+            foreach (var index in selectedRowList)
+            {
+                toDelete.Add(frameDataGridView.Rows[index]);
+            }
+            foreach (DataGridViewRow row in toDelete)
+            {
+                frameDataGridView.Rows.Remove(row);
+            }
+        }
+
+        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //TODO Get old item state from change stack, make changes
+            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
+        }
+
+        private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //TODO get item state from redo stack, make changes
+            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
+
+        }
+
+        private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // copy selected rows to clipboard
+            var selection = frameDataGridView.SelectedCells;
+
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+
+            List<DataGridViewRow> copiedRows = new List<DataGridViewRow>();
+
+            foreach (int rowIndex in selectedRowList)
+            {
+                if (rowIndex < frameDataGridView.RowCount - 1)
+                {
+                    copiedRows.Add(frameDataGridView.Rows[rowIndex]);
+                }
+            }
+            Clipboard.SetDataObject(copiedRows);
+
+        }
+
+        private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO paste rows before selection, or at the end of the file
+        }
+        
+        private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO paste rows after selection, or at the end of the file
+        }
+        private void bookmarkFrameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO add a nameable bookmark to the selected row
+        }
+        
     }
 
 }

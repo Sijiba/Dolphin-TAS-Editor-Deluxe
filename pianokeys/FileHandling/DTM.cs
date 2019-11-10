@@ -95,7 +95,7 @@ namespace DTMEditor.FileHandling
 		/// <summary>
 		/// File path to the DTM file.
 		/// </summary>
-		public string FilePath { get; private set; }
+		public string FilePath { get; set; }
 
 		/// <summary>
 		/// ID of the game that this movie was made for.
