@@ -323,7 +323,7 @@ namespace pianokeys
 
         private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO paste rows before selection
+            // paste rows before selection
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {
@@ -340,7 +340,7 @@ namespace pianokeys
         
         private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO paste rows after selection, or at the end of the file
+            // paste rows after selection, or at the end of the file
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {

@@ -9,8 +9,6 @@ namespace pianokeys
 {
     public class Frame
     {
-        private object v;
-
         public bool ST { get; set; }
         public bool A { get; set; }
         public bool B { get; set; }
