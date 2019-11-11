@@ -9,6 +9,8 @@ namespace pianokeys
 {
     public class Frame
     {
+        private object v;
+
         public bool ST { get; set; }
         public bool A { get; set; }
         public bool B { get; set; }
@@ -74,6 +76,28 @@ namespace pianokeys
 
             LP = (byte)datum.GetTriggerValue(GameCubeTrigger.L);
             RP = (byte)datum.GetTriggerValue(GameCubeTrigger.R);
+        }
+
+        public Frame(Frame frameToCopy)
+        {
+            this.A =  frameToCopy.A;
+            this.B =  frameToCopy.B;
+            this.L =  frameToCopy.L;
+            this.R =  frameToCopy.R;
+            this.X =  frameToCopy.X;
+            this.Y =  frameToCopy.Y;
+            this.Z =  frameToCopy.Z;
+            this.DU = frameToCopy.DU;
+            this.DD = frameToCopy.DD;
+            this.DL = frameToCopy.DL;
+            this.DR = frameToCopy.DR;
+            this.ST = frameToCopy.ST;
+            this.CX = frameToCopy.CX;
+            this.CY = frameToCopy.CY;
+            this.LX = frameToCopy.LX;
+            this.LY = frameToCopy.LY;
+            this.LP = frameToCopy.LP;
+            this.RP = frameToCopy.RP;
         }
 
         /** Make a controller datum for writing from a grid frame. */

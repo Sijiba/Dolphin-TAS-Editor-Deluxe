@@ -19,12 +19,14 @@ namespace pianokeys
 {
     public partial class Form1 : Form
     {
-        public Frame ActiveFrame;
-        BindingSource frameDataSource;
-        BindingList<Frame> frameList;
-        DTM loadedFile;
+        private Frame ActiveFrame;
+        private BindingSource frameDataSource;
+        private BindingList<Frame> frameList;
+        private DTM loadedFile;
 
-        List<DataGridViewRow> bookmarkedRows;
+        private List<DataGridViewRow> bookmarkedRows;
+
+        private List<Frame> clipboard;
 
         public Form1()
         {
@@ -35,6 +37,7 @@ namespace pianokeys
             frameList = new BindingList<Frame>();
             loadedFile = null;
             bookmarkedRows = new List<DataGridViewRow>();
+            clipboard = new List<Frame>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -218,6 +221,7 @@ namespace pianokeys
 
             copyFramesToolStripMenuItem.Enabled = anyRowsSelected;
             pasteToolStripMenuItem.Enabled = anyRowsSelected;
+            pasteAfterToolStripMenuItem.Enabled = anyRowsSelected;
             insertAfterMenuItem.Enabled = anyRowsSelected;
             insertBeforeMenuItem.Enabled = anyRowsSelected;
             insertMultipleMenuItem.Enabled = anyRowsSelected;
@@ -257,14 +261,16 @@ namespace pianokeys
 
         private void insertBeforeMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO insert before
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            if (selectedRowList.Count > 0)
+                frameList.Insert(selectedRowList.Min(), new Frame());
         }
 
         private void insertAfterMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO insert after
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            if (selectedRowList.Count > 0)
+                frameList.Insert(selectedRowList.Max() + 1, new Frame());
         }
 
         private void insertMultipleMenuItem_Click(object sender, EventArgs e)
@@ -275,7 +281,6 @@ namespace pianokeys
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO delete row 
             var selectedRowList = getSelectedRowsFromCells();
             var toDelete = new List<DataGridViewRow>();
             foreach (var index in selectedRowList)
@@ -304,31 +309,50 @@ namespace pianokeys
         private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // copy selected rows to clipboard
-            var selection = frameDataGridView.SelectedCells;
+            HashSet<int> selectedRows = getSelectedRowsFromCells();
 
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
-
-            List<DataGridViewRow> copiedRows = new List<DataGridViewRow>();
-
-            foreach (int rowIndex in selectedRowList)
+            if (selectedRows.Count > 0)
             {
-                if (rowIndex < frameDataGridView.RowCount - 1)
+                clipboard.Clear();
+                foreach (int rowIndex in selectedRows)
                 {
-                    copiedRows.Add(frameDataGridView.Rows[rowIndex]);
+                    clipboard.Add(new Frame(frameList[rowIndex]));
                 }
             }
-            Clipboard.SetDataObject(copiedRows);
-
         }
 
         private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO paste rows before selection, or at the end of the file
+            //TODO paste rows before selection
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            if (selectedRowList.Count > 0 && clipboard.Count > 0)
+            {
+                frameList.RaiseListChangedEvents = false;
+                int insertPosition = selectedRowList.Min();
+                for (int i = clipboard.Count - 1; i >= 0; i--)
+                {
+                    if (i == 0)
+                        frameList.RaiseListChangedEvents = true;
+                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
+                }
+            }
         }
         
         private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //TODO paste rows after selection, or at the end of the file
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            if (selectedRowList.Count > 0 && clipboard.Count > 0)
+            {
+                frameList.RaiseListChangedEvents = false;
+                int insertPosition = selectedRowList.Max() + 1;
+                for (int i = clipboard.Count - 1; i >= 0; i--)
+                {
+                    if (i == 0)
+                        frameList.RaiseListChangedEvents = true;
+                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
+                }
+            }
         }
         private void bookmarkFrameToolStripMenuItem_Click(object sender, EventArgs e)
         {

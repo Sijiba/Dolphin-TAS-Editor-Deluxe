@@ -85,6 +85,7 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.trackBar5 = new System.Windows.Forms.TrackBar();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -126,7 +127,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -135,6 +135,7 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -157,7 +158,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // frameDataGridView
@@ -422,7 +422,7 @@
             this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
             this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(205, 252);
+            this.gridContextMenu.Size = new System.Drawing.Size(205, 230);
             this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
@@ -710,6 +710,10 @@
             0,
             0});
             this.numericUpDown5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // activeFrameBindingSource
+            // 
+            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
             // 
             // trackBar5
             // 
@@ -1307,10 +1311,6 @@
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
-            // activeFrameBindingSource
-            // 
-            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1334,6 +1334,7 @@
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
@@ -1363,7 +1364,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
