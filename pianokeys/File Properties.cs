@@ -17,11 +17,14 @@ namespace pianokeys
 
         public FilePropertiesDialog(DTM dtmHeader)
         {
+            InitializeComponent();
             if (dtmHeader != null)
+            {
                 authorName = Encoding.UTF8.GetString(dtmHeader.Author);
+                textBox1.Text = Encoding.UTF8.GetString(dtmHeader.GameID);
+            }
             else
                 authorName = "";
-            InitializeComponent();
             textBox2.Text = authorName;
         }
 
