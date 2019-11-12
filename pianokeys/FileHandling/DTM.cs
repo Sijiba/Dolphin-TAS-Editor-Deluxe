@@ -145,7 +145,7 @@ namespace DTMEditor.FileHandling
 		/// <summary>
 		/// Author's name
 		/// </summary>
-		public byte[] Author { get; private set; }
+		public byte[] Author { get; set; }
 
 		/// <summary>
 		/// Name of the video backend used.

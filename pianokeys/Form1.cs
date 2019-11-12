@@ -161,6 +161,7 @@ namespace pianokeys
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //TODO if file is null
             saveFile(loadedFile.FilePath);
         }
         
@@ -198,7 +199,14 @@ namespace pianokeys
         private void fileInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //TODO Show a form with info about the loaded file
-            
+            var propsDialog = new FilePropertiesDialog(loadedFile);
+            if (propsDialog.ShowDialog() == DialogResult.OK)
+            {
+                byte[] newName = Encoding.UTF8.GetBytes(propsDialog.authorName);
+                Array.Resize(ref newName, 32);
+                loadedFile.Author = newName;
+            }
+
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,7 +217,6 @@ namespace pianokeys
             {
                 saveFile(saveFileDialog1.FileName);
             }
-
         }
 
         private void gridContextMenu_Opening_1(object sender, CancelEventArgs e)

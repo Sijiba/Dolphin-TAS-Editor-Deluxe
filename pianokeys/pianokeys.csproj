@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="File Properties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="File Properties.Designer.cs">
+      <DependentUpon>File Properties.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileHandling\ControllerData\DTMControllerDatum.cs" />
     <Compile Include="FileHandling\ControllerData\GameCubeAxis.cs" />
     <Compile Include="FileHandling\ControllerData\GameCubeButton.cs" />
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="File Properties.resx">
+      <DependentUpon>File Properties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
