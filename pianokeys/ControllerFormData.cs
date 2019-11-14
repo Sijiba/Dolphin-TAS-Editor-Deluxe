@@ -29,6 +29,14 @@ namespace pianokeys
         public byte CX { get; set; }
         public byte CY { get; set; }
 
+        private string note;
+        public string Note { get { return note; } set {
+                if (value == null)
+                    this.note = "";
+                else
+                    this.note = value.Trim();
+            }
+        }
 
         public Frame()
         {
@@ -49,6 +57,8 @@ namespace pianokeys
             LY = 128;
             LP = 0;
             RP = 0;
+
+            Note = "";
         }
 
         /** Make a grid frame from a controller datum. */
@@ -74,6 +84,8 @@ namespace pianokeys
 
             LP = (byte)datum.GetTriggerValue(GameCubeTrigger.L);
             RP = (byte)datum.GetTriggerValue(GameCubeTrigger.R);
+
+            Note = "";
         }
 
         public Frame(Frame frameToCopy)
@@ -96,6 +108,8 @@ namespace pianokeys
             this.LY = frameToCopy.LY;
             this.LP = frameToCopy.LP;
             this.RP = frameToCopy.RP;
+
+            Note = frameToCopy.Note;
         }
 
         /** Make a controller datum for writing from a grid frame. */

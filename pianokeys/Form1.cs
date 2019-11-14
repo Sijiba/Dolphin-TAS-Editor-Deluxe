@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using DTMEditor.FileHandling;
 //TODO
 
 // Menu Bar Functions
-// Bookmarks
+// Show Filters for frames with notes
 // Bugfix: Active section checkboxes take 2 clicks to start changing???
 
 namespace pianokeys
@@ -23,9 +24,7 @@ namespace pianokeys
         private BindingSource frameDataSource;
         private BindingList<Frame> frameList;
         private DTM loadedFile;
-
-        private List<DataGridViewRow> bookmarkedRows;
-
+        
         private List<Frame> clipboard;
 
         public Form1()
@@ -36,7 +35,6 @@ namespace pianokeys
             activeFrameBindingSource.Add(t);
             frameList = new BindingList<Frame>();
             loadedFile = null;
-            bookmarkedRows = new List<DataGridViewRow>();
             clipboard = new List<Frame>();
         }
 
@@ -44,14 +42,22 @@ namespace pianokeys
         {
             frameDataSource = new BindingSource(frameList, null);
             frameDataGridView.DataSource = frameDataSource;
+            frameNavigator.BindingSource = frameDataSource;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            var row = frameDataGridView.Rows[e.RowIndex].Index;
-            Frame activeFrame = frameList[row];
-            showActiveFrame(activeFrame, row);
+            if (e.RowIndex >= 0)
+            {
+                var row = frameDataGridView.Rows[e.RowIndex].Index;
+                Frame activeFrame = frameList[row];
+                showActiveFrame(activeFrame, row);
+            }
+            else
+            {
+                selectedFrameBox.Enabled = false;
+            }
         }
         
         private void SliderValueChanged(object sender, EventArgs e)
@@ -84,8 +90,9 @@ namespace pianokeys
             return selectedRowList;
         }
 
-        private int singleSelectedRow(DataGridViewSelectedCellCollection selection)
+        private int singleSelectedRow()
         {
+            DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
             if (selection.Count <= 0)
                 return -1;
 
@@ -112,8 +119,8 @@ namespace pianokeys
             bool enableActivePanel = true;
             
             DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
-            int row = singleSelectedRow(selection);
-            if (row != -1)
+            int row = singleSelectedRow();
+            if (row >= 0 && row < frameList.Count)
             {
                 Frame activeFrame = frameList.ElementAt(row);
                 showActiveFrame(activeFrame, row);
@@ -131,11 +138,11 @@ namespace pianokeys
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            //TODO Load adjacent bookmarks file if present
+            string path = openFileDialog1.FileName;
             DTM inputFile = null;
             try
             {
-                inputFile = new DTM(openFileDialog1.FileName);
+                inputFile = new DTM(path);
             }
             catch (Exception ex)
             {
@@ -150,6 +157,24 @@ namespace pianokeys
                 foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
                 {
                     frameList.Add(new Frame(datum));
+                }
+
+                // Load adjacent bookmarks file if present
+                string notesPath = Path.ChangeExtension(path, ".log");
+                if (File.Exists(notesPath))
+                {
+                    using (StreamReader file =
+                        new StreamReader(notesPath))
+                    {
+                        while (!file.EndOfStream)
+                        {
+                            string[] valuePair = file.ReadLine().Split('\t');
+                            int frame = int.Parse(valuePair[0]) - 1;
+                            string msg = valuePair[1].Trim();
+                            if (frameList.Count > frame && frame >= 0)
+                                frameList[frame].Note = msg;
+                        }
+                    }
                 }
             }
         }
@@ -169,24 +194,43 @@ namespace pianokeys
         
         private void saveFile(string path)
         {
-            //TODO Save adjacent bookmarks file if present
             if (loadedFile != null)
             {
+                var noteData = new List<Tuple<int, string>>();
                 loadedFile.ControllerData.Clear();
-                foreach (Frame frame in frameList)
+                for (int i = 0; i < frameList.Count; i++)
                 {
+                    Frame frame = frameList[i];
                     loadedFile.ControllerData.Add(Frame.MakeFileDatum(frame));
+                    var note = frame.Note;
+                    if (note.Length > 0)
+                    {
+                        noteData.Add(new Tuple<int, string>(i+1, note));
+                    }
                 }
                 loadedFile.Save(path);
                 loadedFile.FilePath = path;
+
+                // Save adjacent notes file if notes are present
+                if (noteData.Count > 0)
+                {
+                    string notesPath = Path.ChangeExtension(path, ".log");
+
+                    using (StreamWriter file =
+                        new StreamWriter(notesPath))
+                    {
+                        foreach (var tuple in noteData)
+                        {
+                            file.Write(tuple.Item1.ToString() + "\t");
+                            file.Write(tuple.Item2.ToString() + "\n");
+                        }
+                    }
+                }
             }
             else
             {
-                var result = saveFileDialog1.ShowDialog();
-                if (result == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-                {
-                    saveFile(saveFileDialog1.FileName);
-                }
+                MessageBox.Show("You can't save a movie file without specifying a game. Load an existing TAS file.",
+                    "Failed to save", MessageBoxButtons.OK);
             }
         }
 
@@ -194,7 +238,7 @@ namespace pianokeys
         {
             for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
             {
-                frameDataGridView.Rows[i].HeaderCell.Value = i.ToString();
+                frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
 
@@ -202,7 +246,7 @@ namespace pianokeys
         {
             for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
             {
-                frameDataGridView.Rows[i].HeaderCell.Value = i.ToString();
+                frameDataGridView.Rows[i].HeaderCell.Value = (i+1).ToString();
             }
         }
 
@@ -255,7 +299,7 @@ namespace pianokeys
         private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selection = frameDataGridView.SelectedCells;
-            if (singleSelectedRow(selection) != -1)
+            if (singleSelectedRow() != -1)
             {
                 foreach (DataGridViewCell cell in selection)
                 {
@@ -270,6 +314,10 @@ namespace pianokeys
                             cell.Value = 0;
                         else
                             cell.Value = 128;
+                    }
+                    else if (cell.ValueType == typeof(string))
+                    {
+                        cell.Value = "";
                     }
                 }
             }
@@ -371,11 +419,6 @@ namespace pianokeys
                 }
             }
         }
-        private void bookmarkFrameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //TODO add a nameable bookmark to the selected row
-        }
-        
-    }
+
 
 }

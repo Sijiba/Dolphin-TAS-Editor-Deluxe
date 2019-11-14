@@ -101,7 +101,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(140, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "(GameID)";
+            this.textBox1.Text = "(No Game)";
             // 
             // panel1
             // 
