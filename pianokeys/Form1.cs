@@ -24,7 +24,7 @@ namespace pianokeys
         private BindingSource frameDataSource;
         private BindingList<Frame> frameList;
         private DTM loadedFile;
-        
+
         private List<Frame> clipboard;
 
         public Form1()
@@ -59,7 +59,7 @@ namespace pianokeys
                 selectedFrameBox.Enabled = false;
             }
         }
-        
+
         private void SliderValueChanged(object sender, EventArgs e)
         {
             activeFrameBindingSource.EndEdit();
@@ -85,7 +85,7 @@ namespace pianokeys
             {
                 int index = selectedThing.OwningRow.Index;
                 if (index < frameDataGridView.Rows.Count - 1)
-                selectedRowList.Add(index);
+                    selectedRowList.Add(index);
             }
             return selectedRowList;
         }
@@ -117,7 +117,7 @@ namespace pianokeys
             //If only one frame is selected, set it as the active display frame
             //else disable upper panel
             bool enableActivePanel = true;
-            
+
             DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
             int row = singleSelectedRow();
             if (row >= 0 && row < frameList.Count)
@@ -133,8 +133,8 @@ namespace pianokeys
 
             selectedFrameBox.Enabled = enableActivePanel;
         }
-        
-        
+
+
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -191,7 +191,7 @@ namespace pianokeys
                 saveFile(loadedFile.FilePath);
             }
         }
-        
+
         private void saveFile(string path)
         {
             if (loadedFile != null)
@@ -205,7 +205,7 @@ namespace pianokeys
                     var note = frame.Note;
                     if (note.Length > 0)
                     {
-                        noteData.Add(new Tuple<int, string>(i+1, note));
+                        noteData.Add(new Tuple<int, string>(i + 1, note));
                     }
                 }
                 loadedFile.Save(path);
@@ -246,7 +246,7 @@ namespace pianokeys
         {
             for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
             {
-                frameDataGridView.Rows[i].HeaderCell.Value = (i+1).ToString();
+                frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
 
@@ -402,7 +402,7 @@ namespace pianokeys
                 }
             }
         }
-        
+
         private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // paste rows after selection, or at the end of the file
@@ -420,5 +420,5 @@ namespace pianokeys
             }
         }
 
-
+    }
 }
