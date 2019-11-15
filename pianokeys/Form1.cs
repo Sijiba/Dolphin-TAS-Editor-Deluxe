@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTMEditor.FileHandling;
+using Equin.ApplicationFramework;
 
 //TODO
 
 // Menu Bar Functions
 // Show Filters for frames with notes
+// Lol what if we could "video preview" by running dolphin with the current movie
 // Bugfix: Active section checkboxes take 2 clicks to start changing???
 
 namespace pianokeys
@@ -21,8 +23,8 @@ namespace pianokeys
     public partial class Form1 : Form
     {
         private Frame ActiveFrame;
-        private BindingSource frameDataSource;
         private BindingList<Frame> frameList;
+        private BindingListView<Frame> frameView;
         private DTM loadedFile;
 
         private List<Frame> clipboard;
@@ -30,25 +32,26 @@ namespace pianokeys
         public Form1()
         {
             InitializeComponent();
+            filterComboBox.SelectedIndex = 0;
             ActiveFrame = new Frame();
             var t = new Frame();
             activeFrameBindingSource.Add(t);
             frameList = new BindingList<Frame>();
+            frameView = new BindingListView<Frame>(frameList);
             loadedFile = null;
             clipboard = new List<Frame>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            frameDataSource = new BindingSource(frameList, null);
-            frameDataGridView.DataSource = frameDataSource;
-            frameNavigator.BindingSource = frameDataSource;
+            frameDataGridView.DataSource = frameView;
+            frameNavigator.BindingSource = new BindingSource(frameList, null);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < frameList.Count)
             {
                 var row = frameDataGridView.Rows[e.RowIndex].Index;
                 Frame activeFrame = frameList[row];
@@ -234,11 +237,29 @@ namespace pianokeys
             }
         }
 
+        private void updateRowHeader(DataGridViewRow row)
+        {
+            ObjectView<Frame> frameObj = (ObjectView<Frame>)row.DataBoundItem;
+            var frame = frameObj.Object;
+            if (frame != null)
+            {
+                int index = frameList.IndexOf(frame);
+                if (index >= 0)
+                    row.HeaderCell.Value = (index + 1).ToString();
+                else
+                    row.HeaderCell.Value = "";
+            }
+            else
+                row.HeaderCell.Value = "";
+        }
+
         private void frameDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
             {
-                frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                updateRowHeader(frameDataGridView.Rows[i]);
+
+                //frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
 
@@ -420,5 +441,24 @@ namespace pianokeys
             }
         }
 
+        private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (frameView != null)
+            {
+                switch (filterComboBox.SelectedIndex)
+                {
+                    case 1:
+                        frameView.ApplyFilter(delegate (Frame f) { return f.Note.Length > 0; });
+                        break;
+                    case 2:
+                        Frame defaultFrame = new Frame();
+                        frameView.ApplyFilter(delegate (Frame f) { return !(f.Equals(defaultFrame)); });
+                        break;
+                    default:
+                        frameView.RemoveFilter();
+                        break;
+                }
+            }
+        }
     }
 }

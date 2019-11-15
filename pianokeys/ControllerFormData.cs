@@ -140,5 +140,30 @@ namespace pianokeys
 
             return dt;
         }
+
+        public bool Equals(Frame other)
+        {
+            return
+                this.Note == other.Note &&
+                this.LX == other.LX &&
+                this.LY == other.LY &&
+                this.CX == other.CX &&
+                this.CY == other.CY &&
+                this.LP == other.LP &&
+                this.RP == other.RP &&
+                this.A == other.A &&
+                this.B == other.B &&
+                this.L == other.L &&
+                this.R == other.R &&
+                this.X == other.X &&
+                this.Y == other.Y &&
+                this.Z == other.Z &&
+                this.DU == other.DU &&
+                this.DD == other.DD &&
+                this.DL == other.DL &&
+                this.DR == other.DR &&
+                this.ST == other.ST
+            ;   
+        }
     }
 }
