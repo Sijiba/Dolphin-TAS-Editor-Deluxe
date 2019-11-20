@@ -13,8 +13,8 @@ using Equin.ApplicationFramework;
 
 //TODO
 
-// Menu Bar Functions
-// Show Filters for frames with notes
+// Replace stalling moments with progress bar/disabling controls
+// Undo/Redo
 // Lol what if we could "video preview" by running dolphin with the current movie
 // Bugfix: Active section checkboxes take 2 clicks to start changing???
 
@@ -137,54 +137,67 @@ namespace pianokeys
             selectedFrameBox.Enabled = enableActivePanel;
         }
 
-
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void stopListEvents()
         {
-            string path = openFileDialog1.FileName;
-            DTM inputFile = null;
-            try
-            {
-                inputFile = new DTM(path);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Load Error", MessageBoxButtons.OK);
-            }
-            if (inputFile != null)
-            {
-                loadedFile = inputFile;
-
-                frameList.Clear();
-
-                foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
-                {
-                    frameList.Add(new Frame(datum));
-                }
-
-                // Load adjacent bookmarks file if present
-                string notesPath = Path.ChangeExtension(path, ".log");
-                if (File.Exists(notesPath))
-                {
-                    using (StreamReader file =
-                        new StreamReader(notesPath))
-                    {
-                        while (!file.EndOfStream)
-                        {
-                            string[] valuePair = file.ReadLine().Split('\t');
-                            int frame = int.Parse(valuePair[0]) - 1;
-                            string msg = valuePair[1].Trim();
-                            if (frameList.Count > frame && frame >= 0)
-                                frameList[frame].Note = msg;
-                        }
-                    }
-                }
-            }
+            frameDataGridView.SuspendLayout();
+            frameList.RaiseListChangedEvents = false;
         }
 
+        private void continueListEvents()
+        {
+            frameList.RaiseListChangedEvents = true;
+            frameView.Refresh();
+            frameDataGridView.ResumeLayout(true);
+        }
+        
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog1.FileName;
+                DTM inputFile = null;
+                try
+                {
+                    inputFile = new DTM(path);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Load Error", MessageBoxButtons.OK);
+                }
+                if (inputFile != null)
+                {
+                    loadedFile = inputFile;
+                    stopListEvents();
+                    frameList.Clear();
+
+                    foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
+                    {
+                        frameList.Add(new Frame(datum));
+                    }
+
+                    // Load adjacent bookmarks file if present
+                    string notesPath = Path.ChangeExtension(path, ".log");
+                    if (File.Exists(notesPath))
+                    {
+                        using (StreamReader file =
+                            new StreamReader(notesPath))
+                        {
+                            while (!file.EndOfStream)
+                            {
+                                string[] valuePair = file.ReadLine().Split('\t');
+                                int frame = int.Parse(valuePair[0]) - 1;
+                                string msg = valuePair[1].Trim();
+                                if (frameList.Count > frame && frame >= 0)
+                                    frameList[frame].Note = msg;
+                            }
+                        }
+                    }
+
+                    continueListEvents();
+                    statusLabel.Text = "Loaded " + Path.GetFileName(path) + ".";
+                }
+            }
+            
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -214,6 +227,8 @@ namespace pianokeys
                 loadedFile.Save(path);
                 loadedFile.FilePath = path;
 
+                string msg = "Saved " + Path.GetFileName(path);
+
                 // Save adjacent notes file if notes are present
                 if (noteData.Count > 0)
                 {
@@ -228,7 +243,11 @@ namespace pianokeys
                             file.Write(tuple.Item2.ToString() + "\n");
                         }
                     }
+                    msg += " and its notes";
                 }
+                msg += ".";
+
+                statusLabel.Text = msg;
             }
             else
             {
@@ -236,40 +255,7 @@ namespace pianokeys
                     "Failed to save", MessageBoxButtons.OK);
             }
         }
-
-        private void updateRowHeader(DataGridViewRow row)
-        {
-            ObjectView<Frame> frameObj = (ObjectView<Frame>)row.DataBoundItem;
-            var frame = frameObj.Object;
-            if (frame != null)
-            {
-                int index = frameList.IndexOf(frame);
-                if (index >= 0)
-                    row.HeaderCell.Value = (index + 1).ToString();
-                else
-                    row.HeaderCell.Value = "";
-            }
-            else
-                row.HeaderCell.Value = "";
-        }
-
-        private void frameDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
-            {
-                updateRowHeader(frameDataGridView.Rows[i]);
-
-                //frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
-            }
-        }
-
-        private void frameDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            for (int i = Math.Max(e.RowIndex - 1, 0); i < frameDataGridView.RowCount - 1; i++)
-            {
-                frameDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
-            }
-        }
+        
 
         private void fileInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -345,6 +331,20 @@ namespace pianokeys
 
         }
 
+        private void insertNewFrame(int pos, uint count, Frame baseFrame = null)
+        {
+            baseFrame = baseFrame ?? new Frame();
+
+            if (count > 1)
+                stopListEvents();
+
+            for (int i = 0; i < count; i++)
+                frameList.Insert(pos, baseFrame);
+
+            if (count > 1)
+                continueListEvents();
+        }
+
         private void insertBeforeMenuItem_Click(object sender, EventArgs e)
         {
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
@@ -363,6 +363,23 @@ namespace pianokeys
         {
             //TODO prompt for a number of rows and whether to add them before or
             // after the selected row(s)
+
+            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            if (selectedRowList.Count > 0)
+            {
+                var insDialog = new MultiFrameInsertDialog();
+                if (insDialog.ShowDialog() == DialogResult.OK)
+                {
+                    int insertIndex = 0;
+                    if (insDialog.InsertFramesAfter)
+                        insertIndex = selectedRowList.Max() + 1;
+                    else
+                        insertIndex = selectedRowList.Min();
+
+                    insertNewFrame(insertIndex, insDialog.FrameCount);
+                }
+            }
+
         }
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
@@ -413,14 +430,14 @@ namespace pianokeys
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {
-                frameList.RaiseListChangedEvents = false;
+                stopListEvents();
+                //frameView.RaiseListChangedEvents = false;
                 int insertPosition = selectedRowList.Min();
                 for (int i = clipboard.Count - 1; i >= 0; i--)
                 {
-                    if (i == 0)
-                        frameList.RaiseListChangedEvents = true;
                     frameList.Insert(insertPosition, new Frame(clipboard[i]));
                 }
+                continueListEvents();
             }
         }
 
@@ -430,14 +447,13 @@ namespace pianokeys
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {
-                frameList.RaiseListChangedEvents = false;
+                stopListEvents();
                 int insertPosition = selectedRowList.Max() + 1;
                 for (int i = clipboard.Count - 1; i >= 0; i--)
                 {
-                    if (i == 0)
-                        frameList.RaiseListChangedEvents = true;
                     frameList.Insert(insertPosition, new Frame(clipboard[i]));
                 }
+                continueListEvents();
             }
         }
 
@@ -458,6 +474,35 @@ namespace pianokeys
                         frameView.RemoveFilter();
                         break;
                 }
+            }
+        }
+
+        private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            bool shouldEnable = (loadedFile != null);
+
+            saveAsToolStripMenuItem.Enabled = shouldEnable;
+            saveToolStripMenuItem.Enabled = shouldEnable;
+            fileInfoToolStripMenuItem.Enabled = shouldEnable;
+
+        }
+
+        private void frameDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            if (e.RowIndex != grid.RowCount - 1)
+            {
+                var rowIdx = (e.RowIndex + 1).ToString();
+
+                var centerFormat = new StringFormat()
+                {
+                    // right alignment might actually make more sense for numbers
+                    Alignment = StringAlignment.Far,
+                    LineAlignment = StringAlignment.Center
+                };
+
+                var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth - 3, e.RowBounds.Height);
+                e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
             }
         }
     }

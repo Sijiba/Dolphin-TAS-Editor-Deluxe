@@ -29,43 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.frameDataGridView = new System.Windows.Forms.DataGridView();
-            this.ST = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.A = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.B = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Y = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DL = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DR = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DU = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.L = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.R = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.LP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.undoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteAfterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.insertBeforeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertAfterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertBeforeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertMultipleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearSelectedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,8 +122,30 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.filterComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.statusLabel = new System.Windows.Forms.ToolStripLabel();
+            this.ST = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.A = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.B = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Y = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DL = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DR = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DU = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.L = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.R = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.LP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -207,25 +210,25 @@
             this.CY,
             this.NoteColumn});
             this.frameDataGridView.ContextMenuStrip = this.gridContextMenu;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.frameDataGridView.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.frameDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.frameDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.frameDataGridView.Location = new System.Drawing.Point(3, 3);
             this.frameDataGridView.Name = "frameDataGridView";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.frameDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.frameDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.frameDataGridView.RowHeadersWidth = 60;
             this.frameDataGridView.RowTemplate.Height = 30;
             this.frameDataGridView.ShowCellErrors = false;
@@ -234,205 +237,8 @@
             this.frameDataGridView.Size = new System.Drawing.Size(780, 228);
             this.frameDataGridView.TabIndex = 1;
             this.frameDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.frameDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.frameDataGridView_RowsAdded);
-            this.frameDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.frameDataGridView_RowsRemoved);
+            this.frameDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.frameDataGridView_RowPostPaint);
             this.frameDataGridView.SelectionChanged += new System.EventHandler(this.dataGridSelectionChanged);
-            // 
-            // ST
-            // 
-            this.ST.DataPropertyName = "ST";
-            this.ST.HeaderText = "ST";
-            this.ST.Name = "ST";
-            this.ST.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ST.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ST.ToolTipText = "Start";
-            this.ST.Width = 30;
-            // 
-            // A
-            // 
-            this.A.DataPropertyName = "A";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle8.NullValue = false;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.A.DefaultCellStyle = dataGridViewCellStyle8;
-            this.A.HeaderText = "A";
-            this.A.Name = "A";
-            this.A.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.A.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.A.Width = 30;
-            // 
-            // B
-            // 
-            this.B.DataPropertyName = "B";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle9.NullValue = false;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.B.DefaultCellStyle = dataGridViewCellStyle9;
-            this.B.HeaderText = "B";
-            this.B.Name = "B";
-            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.B.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.B.Width = 30;
-            // 
-            // X
-            // 
-            this.X.DataPropertyName = "X";
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            this.X.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.X.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.X.Width = 30;
-            // 
-            // Y
-            // 
-            this.Y.DataPropertyName = "Y";
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            this.Y.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Y.Width = 30;
-            // 
-            // DL
-            // 
-            this.DL.DataPropertyName = "DL";
-            this.DL.HeaderText = "DL";
-            this.DL.Name = "DL";
-            this.DL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DL.ToolTipText = "D-Pad Left";
-            this.DL.Width = 30;
-            // 
-            // DR
-            // 
-            this.DR.DataPropertyName = "DR";
-            this.DR.HeaderText = "DR";
-            this.DR.Name = "DR";
-            this.DR.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DR.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DR.ToolTipText = "D-Pad Right";
-            this.DR.Width = 30;
-            // 
-            // DU
-            // 
-            this.DU.DataPropertyName = "DU";
-            this.DU.HeaderText = "DU";
-            this.DU.Name = "DU";
-            this.DU.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DU.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DU.ToolTipText = "D-Pad Up";
-            this.DU.Width = 30;
-            // 
-            // DD
-            // 
-            this.DD.DataPropertyName = "DD";
-            this.DD.HeaderText = "DD";
-            this.DD.Name = "DD";
-            this.DD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DD.ToolTipText = "D-Pad Down";
-            this.DD.Width = 30;
-            // 
-            // Z
-            // 
-            this.Z.DataPropertyName = "Z";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.NullValue = false;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Z.DefaultCellStyle = dataGridViewCellStyle10;
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
-            this.Z.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Z.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Z.Width = 30;
-            // 
-            // L
-            // 
-            this.L.DataPropertyName = "L";
-            this.L.HeaderText = "L";
-            this.L.Name = "L";
-            this.L.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.L.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.L.Width = 30;
-            // 
-            // R
-            // 
-            this.R.DataPropertyName = "R";
-            this.R.HeaderText = "R";
-            this.R.Name = "R";
-            this.R.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.R.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.R.Width = 30;
-            // 
-            // LP
-            // 
-            this.LP.DataPropertyName = "LP";
-            this.LP.HeaderText = "LP";
-            this.LP.MaxInputLength = 3;
-            this.LP.Name = "LP";
-            this.LP.ToolTipText = "L Pressure";
-            this.LP.Width = 30;
-            // 
-            // RP
-            // 
-            this.RP.DataPropertyName = "RP";
-            this.RP.HeaderText = "RP";
-            this.RP.MaxInputLength = 3;
-            this.RP.Name = "RP";
-            this.RP.ToolTipText = "R Pressure";
-            this.RP.Width = 30;
-            // 
-            // LX
-            // 
-            this.LX.DataPropertyName = "LX";
-            this.LX.HeaderText = "LX";
-            this.LX.MaxInputLength = 3;
-            this.LX.Name = "LX";
-            this.LX.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.LX.ToolTipText = "Left Stick X";
-            this.LX.Width = 30;
-            // 
-            // LY
-            // 
-            this.LY.DataPropertyName = "LY";
-            this.LY.HeaderText = "LY";
-            this.LY.MaxInputLength = 3;
-            this.LY.Name = "LY";
-            this.LY.ToolTipText = "Left Stick Y";
-            this.LY.Width = 30;
-            // 
-            // CX
-            // 
-            this.CX.DataPropertyName = "CX";
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CX.DefaultCellStyle = dataGridViewCellStyle11;
-            this.CX.HeaderText = "CX";
-            this.CX.MaxInputLength = 3;
-            this.CX.Name = "CX";
-            this.CX.ToolTipText = "C-Stick X";
-            this.CX.Width = 30;
-            // 
-            // CY
-            // 
-            this.CY.DataPropertyName = "CY";
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CY.DefaultCellStyle = dataGridViewCellStyle12;
-            this.CY.HeaderText = "CY";
-            this.CY.MaxInputLength = 3;
-            this.CY.Name = "CY";
-            this.CY.ToolTipText = "C-Stick Y";
-            this.CY.Width = 30;
-            // 
-            // NoteColumn
-            // 
-            this.NoteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NoteColumn.DataPropertyName = "Note";
-            this.NoteColumn.HeaderText = "Note";
-            this.NoteColumn.Name = "NoteColumn";
             // 
             // gridContextMenu
             // 
@@ -440,24 +246,24 @@
             this.undoToolStripMenuItem1,
             this.redoToolStripMenuItem1,
             this.copyFramesToolStripMenuItem,
-            this.pasteToolStripMenuItem,
             this.pasteAfterToolStripMenuItem,
+            this.pasteToolStripMenuItem,
             this.toolStripSeparator1,
-            this.insertBeforeMenuItem,
             this.insertAfterMenuItem,
+            this.insertBeforeMenuItem,
             this.insertMultipleMenuItem,
             this.deleteMenuItem,
             this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
             this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(205, 230);
+            this.gridContextMenu.Size = new System.Drawing.Size(213, 230);
             this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
@@ -465,7 +271,7 @@
             // 
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
+            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
             this.redoToolStripMenuItem1.Text = "Redo";
             this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
@@ -473,64 +279,64 @@
             // 
             this.copyFramesToolStripMenuItem.Name = "copyFramesToolStripMenuItem";
             this.copyFramesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.copyFramesToolStripMenuItem.Text = "Copy Frame(s)";
             this.copyFramesToolStripMenuItem.Click += new System.EventHandler(this.copyFramesToolStripMenuItem_Click);
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.pasteToolStripMenuItem.Text = "Paste Before";
-            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteBeforeToolStripMenuItem_Click);
             // 
             // pasteAfterToolStripMenuItem
             // 
             this.pasteAfterToolStripMenuItem.Name = "pasteAfterToolStripMenuItem";
-            this.pasteAfterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.V)));
-            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.pasteAfterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.pasteAfterToolStripMenuItem.Text = "Paste After";
             this.pasteAfterToolStripMenuItem.Click += new System.EventHandler(this.pasteAfterToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.pasteToolStripMenuItem.Text = "Paste Before";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteBeforeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
-            // 
-            // insertBeforeMenuItem
-            // 
-            this.insertBeforeMenuItem.Name = "insertBeforeMenuItem";
-            this.insertBeforeMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.insertBeforeMenuItem.Text = "Insert Frame Before";
-            this.insertBeforeMenuItem.Click += new System.EventHandler(this.insertBeforeMenuItem_Click);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
             // 
             // insertAfterMenuItem
             // 
             this.insertAfterMenuItem.Name = "insertAfterMenuItem";
-            this.insertAfterMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.insertAfterMenuItem.Size = new System.Drawing.Size(212, 22);
             this.insertAfterMenuItem.Text = "Insert Frame After";
             this.insertAfterMenuItem.Click += new System.EventHandler(this.insertAfterMenuItem_Click);
+            // 
+            // insertBeforeMenuItem
+            // 
+            this.insertBeforeMenuItem.Name = "insertBeforeMenuItem";
+            this.insertBeforeMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.insertBeforeMenuItem.Text = "Insert Frame Before";
+            this.insertBeforeMenuItem.Click += new System.EventHandler(this.insertBeforeMenuItem_Click);
             // 
             // insertMultipleMenuItem
             // 
             this.insertMultipleMenuItem.Name = "insertMultipleMenuItem";
-            this.insertMultipleMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.insertMultipleMenuItem.Size = new System.Drawing.Size(212, 22);
             this.insertMultipleMenuItem.Text = "Insert Frames...";
             this.insertMultipleMenuItem.Click += new System.EventHandler(this.insertMultipleMenuItem_Click);
             // 
             // deleteMenuItem
             // 
             this.deleteMenuItem.Name = "deleteMenuItem";
-            this.deleteMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.deleteMenuItem.Size = new System.Drawing.Size(212, 22);
             this.deleteMenuItem.Text = "Delete Selected Frame(s)";
             this.deleteMenuItem.Click += new System.EventHandler(this.deleteMenuItem_Click);
             // 
             // clearSelectedValuesToolStripMenuItem
             // 
             this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
-            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
             this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
             // 
@@ -562,6 +368,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             // 
             // loadToolStripMenuItem
             // 
@@ -1284,7 +1091,6 @@
             this.openFileDialog1.DefaultExt = "dtm";
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // splitContainer1
             // 
@@ -1343,7 +1149,9 @@
             this.bindingNavigatorDeleteItem,
             this.toolStripSeparator2,
             this.toolStripLabel1,
-            this.filterComboBox});
+            this.filterComboBox,
+            this.toolStripSeparator3,
+            this.statusLabel});
             this.frameNavigator.Location = new System.Drawing.Point(0, 234);
             this.frameNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.frameNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -1468,6 +1276,208 @@
             // 
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(97, 22);
+            this.statusLabel.Text = "Pick a file to edit.";
+            // 
+            // ST
+            // 
+            this.ST.DataPropertyName = "ST";
+            this.ST.HeaderText = "ST";
+            this.ST.Name = "ST";
+            this.ST.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ST.ToolTipText = "Start";
+            this.ST.Width = 30;
+            // 
+            // A
+            // 
+            this.A.DataPropertyName = "A";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.A.DefaultCellStyle = dataGridViewCellStyle1;
+            this.A.HeaderText = "A";
+            this.A.Name = "A";
+            this.A.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.A.Width = 30;
+            // 
+            // B
+            // 
+            this.B.DataPropertyName = "B";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.NullValue = false;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.B.DefaultCellStyle = dataGridViewCellStyle2;
+            this.B.HeaderText = "B";
+            this.B.Name = "B";
+            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.B.Width = 30;
+            // 
+            // X
+            // 
+            this.X.DataPropertyName = "X";
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.X.Width = 30;
+            // 
+            // Y
+            // 
+            this.Y.DataPropertyName = "Y";
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            this.Y.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Y.Width = 30;
+            // 
+            // DL
+            // 
+            this.DL.DataPropertyName = "DL";
+            this.DL.HeaderText = "DL";
+            this.DL.Name = "DL";
+            this.DL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DL.ToolTipText = "D-Pad Left";
+            this.DL.Width = 30;
+            // 
+            // DR
+            // 
+            this.DR.DataPropertyName = "DR";
+            this.DR.HeaderText = "DR";
+            this.DR.Name = "DR";
+            this.DR.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DR.ToolTipText = "D-Pad Right";
+            this.DR.Width = 30;
+            // 
+            // DU
+            // 
+            this.DU.DataPropertyName = "DU";
+            this.DU.HeaderText = "DU";
+            this.DU.Name = "DU";
+            this.DU.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DU.ToolTipText = "D-Pad Up";
+            this.DU.Width = 30;
+            // 
+            // DD
+            // 
+            this.DD.DataPropertyName = "DD";
+            this.DD.HeaderText = "DD";
+            this.DD.Name = "DD";
+            this.DD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DD.ToolTipText = "D-Pad Down";
+            this.DD.Width = 30;
+            // 
+            // Z
+            // 
+            this.Z.DataPropertyName = "Z";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.NullValue = false;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Z.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
+            this.Z.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Z.Width = 30;
+            // 
+            // L
+            // 
+            this.L.DataPropertyName = "L";
+            this.L.HeaderText = "L";
+            this.L.Name = "L";
+            this.L.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.L.Width = 30;
+            // 
+            // R
+            // 
+            this.R.DataPropertyName = "R";
+            this.R.HeaderText = "R";
+            this.R.Name = "R";
+            this.R.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.R.Width = 30;
+            // 
+            // LP
+            // 
+            this.LP.DataPropertyName = "LP";
+            this.LP.HeaderText = "LP";
+            this.LP.MaxInputLength = 3;
+            this.LP.Name = "LP";
+            this.LP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LP.ToolTipText = "L Pressure";
+            this.LP.Width = 30;
+            // 
+            // RP
+            // 
+            this.RP.DataPropertyName = "RP";
+            this.RP.HeaderText = "RP";
+            this.RP.MaxInputLength = 3;
+            this.RP.Name = "RP";
+            this.RP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.RP.ToolTipText = "R Pressure";
+            this.RP.Width = 30;
+            // 
+            // LX
+            // 
+            this.LX.DataPropertyName = "LX";
+            this.LX.HeaderText = "LX";
+            this.LX.MaxInputLength = 3;
+            this.LX.Name = "LX";
+            this.LX.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.LX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LX.ToolTipText = "Left Stick X";
+            this.LX.Width = 30;
+            // 
+            // LY
+            // 
+            this.LY.DataPropertyName = "LY";
+            this.LY.HeaderText = "LY";
+            this.LY.MaxInputLength = 3;
+            this.LY.Name = "LY";
+            this.LY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LY.ToolTipText = "Left Stick Y";
+            this.LY.Width = 30;
+            // 
+            // CX
+            // 
+            this.CX.DataPropertyName = "CX";
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CX.DefaultCellStyle = dataGridViewCellStyle4;
+            this.CX.HeaderText = "CX";
+            this.CX.MaxInputLength = 3;
+            this.CX.Name = "CX";
+            this.CX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CX.ToolTipText = "C-Stick X";
+            this.CX.Width = 30;
+            // 
+            // CY
+            // 
+            this.CY.DataPropertyName = "CY";
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CY.DefaultCellStyle = dataGridViewCellStyle5;
+            this.CY.HeaderText = "CY";
+            this.CY.MaxInputLength = 3;
+            this.CY.Name = "CY";
+            this.CY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CY.ToolTipText = "C-Stick Y";
+            this.CY.Width = 30;
+            // 
+            // NoteColumn
+            // 
+            this.NoteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NoteColumn.DataPropertyName = "Note";
+            this.NoteColumn.HeaderText = "Note";
+            this.NoteColumn.Name = "NoteColumn";
+            this.NoteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // activeFrameBindingSource
             // 
@@ -1612,6 +1622,25 @@
         private System.Windows.Forms.ToolStripMenuItem clearSelectedValuesToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem pasteAfterToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.BindingNavigator frameNavigator;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.BindingSource frameBindingSource;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox filterComboBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel statusLabel;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ST;
         private System.Windows.Forms.DataGridViewCheckBoxColumn A;
         private System.Windows.Forms.DataGridViewCheckBoxColumn B;
@@ -1631,23 +1660,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CX;
         private System.Windows.Forms.DataGridViewTextBoxColumn CY;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoteColumn;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.BindingNavigator frameNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.BindingSource frameBindingSource;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripComboBox filterComboBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
