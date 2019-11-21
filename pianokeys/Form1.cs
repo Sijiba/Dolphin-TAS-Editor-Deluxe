@@ -13,11 +13,9 @@ using Equin.ApplicationFramework;
 
 //TODO
 
-// Doubleclick checkbox fix
 // Replace stalling moments with progress bar/disabling controls
 // Undo/Redo
 // Lol what if we could "video preview" by running dolphin with the current movie
-// Bugfix: Active section checkboxes take 2 clicks to start changing???
 // Note: clicking new row when it's partly below the screen adds 10 rows instead
 
 namespace pianokeys
