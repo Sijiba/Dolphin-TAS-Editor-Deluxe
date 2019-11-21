@@ -82,23 +82,25 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.trackBar6 = new System.Windows.Forms.TrackBar();
-            this.label8 = new System.Windows.Forms.Label();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.trackBar5 = new System.Windows.Forms.TrackBar();
+            this.trackBar6 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.trackBar4 = new System.Windows.Forms.TrackBar();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -140,8 +142,6 @@
             this.statusLabel = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
@@ -150,15 +150,17 @@
             this.selectedFrameBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -173,8 +175,6 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).BeginInit();
             this.frameNavigator.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -673,6 +673,26 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(211, 152);
             this.tableLayoutPanel8.TabIndex = 7;
             // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.numericUpDown5, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.numericUpDown6, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 48);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 3;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(160, 101);
+            this.tableLayoutPanel13.TabIndex = 5;
+            // 
             // numericUpDown5
             // 
             this.numericUpDown5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
@@ -693,53 +713,6 @@
             0,
             0});
             this.numericUpDown5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // trackBar5
-            // 
-            this.trackBar5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
-            this.trackBar5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.trackBar5.Location = new System.Drawing.Point(0, 0);
-            this.trackBar5.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar5.Maximum = 255;
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(166, 45);
-            this.trackBar5.TabIndex = 0;
-            this.trackBar5.Value = 128;
-            this.trackBar5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "X-Axis";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // trackBar6
-            // 
-            this.trackBar6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
-            this.trackBar6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.trackBar6.Location = new System.Drawing.Point(166, 45);
-            this.trackBar6.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar6.Maximum = 255;
-            this.trackBar6.Name = "trackBar6";
-            this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar6.Size = new System.Drawing.Size(45, 107);
-            this.trackBar6.TabIndex = 5;
-            this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar6.Value = 128;
-            this.trackBar6.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Y-Axis";
             // 
             // numericUpDown6
             // 
@@ -762,6 +735,53 @@
             0,
             0});
             this.numericUpDown6.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Y-Axis";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "X-Axis";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // trackBar5
+            // 
+            this.trackBar5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
+            this.trackBar5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.trackBar5.Location = new System.Drawing.Point(0, 0);
+            this.trackBar5.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar5.Maximum = 255;
+            this.trackBar5.Name = "trackBar5";
+            this.trackBar5.Size = new System.Drawing.Size(166, 45);
+            this.trackBar5.TabIndex = 0;
+            this.trackBar5.Value = 128;
+            this.trackBar5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // trackBar6
+            // 
+            this.trackBar6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
+            this.trackBar6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.trackBar6.Location = new System.Drawing.Point(166, 45);
+            this.trackBar6.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar6.Maximum = 255;
+            this.trackBar6.Name = "trackBar6";
+            this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar6.Size = new System.Drawing.Size(45, 107);
+            this.trackBar6.TabIndex = 5;
+            this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar6.Value = 128;
+            this.trackBar6.ValueChanged += new System.EventHandler(this.SliderValueChanged);
             // 
             // label1
             // 
@@ -826,6 +846,25 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 152);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel12.ColumnCount = 2;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.numericUpDown3, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.numericUpDown4, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 48);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 3;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(159, 100);
+            this.tableLayoutPanel12.TabIndex = 4;
+            // 
             // numericUpDown3
             // 
             this.numericUpDown3.AutoSize = true;
@@ -848,56 +887,6 @@
             0});
             this.numericUpDown3.ValueChanged += new System.EventHandler(this.SliderValueChanged);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.trackBar1.Location = new System.Drawing.Point(0, 0);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar1.Maximum = 255;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(165, 45);
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.Value = global::pianokeys.Properties.Settings.Default.LeftStickX;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 26);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "X-Axis";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LY", true));
-            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.trackBar2.Location = new System.Drawing.Point(165, 45);
-            this.trackBar2.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar2.Maximum = 255;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 107);
-            this.trackBar2.TabIndex = 5;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar2.Value = 128;
-            this.trackBar2.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(36, 26);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Y-Axis";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // numericUpDown4
             // 
             this.numericUpDown4.AutoSize = true;
@@ -919,6 +908,56 @@
             0,
             0});
             this.numericUpDown4.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 26);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Y-Axis";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 26);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "X-Axis";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.trackBar1.Location = new System.Drawing.Point(0, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar1.Maximum = 255;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(165, 45);
+            this.trackBar1.TabIndex = 0;
+            this.trackBar1.Value = global::pianokeys.Properties.Settings.Default.LeftStickX;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LY", true));
+            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.trackBar2.Location = new System.Drawing.Point(165, 45);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar2.Maximum = 255;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar2.Size = new System.Drawing.Size(45, 107);
+            this.trackBar2.TabIndex = 5;
+            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar2.Value = 128;
+            this.trackBar2.ValueChanged += new System.EventHandler(this.SliderValueChanged);
             // 
             // tableLayoutPanel4
             // 
@@ -1066,7 +1105,7 @@
             this.checkBox12.TabIndex = 11;
             this.checkBox12.Text = "D Down";
             this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox11
             // 
@@ -1079,7 +1118,7 @@
             this.checkBox11.TabIndex = 10;
             this.checkBox11.Text = "D Left";
             this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox10
             // 
@@ -1092,7 +1131,7 @@
             this.checkBox10.TabIndex = 9;
             this.checkBox10.Text = "D Right";
             this.checkBox10.UseVisualStyleBackColor = true;
-            this.checkBox10.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox9
             // 
@@ -1105,7 +1144,7 @@
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Text = "D Up";
             this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox8
             // 
@@ -1118,7 +1157,7 @@
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Text = "Y";
             this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox7
             // 
@@ -1131,7 +1170,7 @@
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Text = "X";
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox6
             // 
@@ -1144,7 +1183,7 @@
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Text = "B";
             this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox5
             // 
@@ -1157,7 +1196,7 @@
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "A";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox4
             // 
@@ -1170,7 +1209,7 @@
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "R";
             this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox3
             // 
@@ -1183,7 +1222,7 @@
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "L";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox2
             // 
@@ -1196,7 +1235,7 @@
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Z";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // checkBox1
             // 
@@ -1209,7 +1248,7 @@
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Start";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckStateChanged += new System.EventHandler(this.SliderValueChanged);
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
             // 
             // openFileDialog1
             // 
@@ -1413,45 +1452,6 @@
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel12.ColumnCount = 2;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Controls.Add(this.numericUpDown3, 1, 0);
-            this.tableLayoutPanel12.Controls.Add(this.numericUpDown4, 1, 1);
-            this.tableLayoutPanel12.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel12.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 48);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(159, 100);
-            this.tableLayoutPanel12.TabIndex = 4;
-            // 
-            // tableLayoutPanel13
-            // 
-            this.tableLayoutPanel13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel13.ColumnCount = 2;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Controls.Add(this.numericUpDown5, 1, 0);
-            this.tableLayoutPanel13.Controls.Add(this.numericUpDown6, 1, 1);
-            this.tableLayoutPanel13.Controls.Add(this.label8, 0, 1);
-            this.tableLayoutPanel13.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 48);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 3;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(160, 101);
-            this.tableLayoutPanel13.TabIndex = 5;
-            // 
             // activeFrameBindingSource
             // 
             this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
@@ -1480,16 +1480,20 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
@@ -1510,10 +1514,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).EndInit();
             this.frameNavigator.ResumeLayout(false);
             this.frameNavigator.PerformLayout();
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
-            this.tableLayoutPanel13.ResumeLayout(false);
-            this.tableLayoutPanel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).EndInit();
             this.ResumeLayout(false);

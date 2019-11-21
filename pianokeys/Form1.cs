@@ -11,21 +11,34 @@ using System.Windows.Forms;
 using DTMEditor.FileHandling;
 using Equin.ApplicationFramework;
 
-//TODO
+/*  TODO
+    FEATURES:
+    Navigate to next frame with specific button values/containing notes
+    Undo/Redo
+    Disable controls while no file is loaded (or if no game is specified?)
+    File > Exit
+    
+    CLEANUP:
+    Try to condense usage of frameList, frameSource, frameView, and frameDataGridView into fewer private variables.
+    Replace stalling moments with progress bar/disabling controls
+    Move heavy tasks to worker thread if necessary
 
-// Replace stalling moments with progress bar/disabling controls
-// Undo/Redo
-// Lol what if we could "video preview" by running dolphin with the current movie
-// Note: clicking new row when it's partly below the screen adds 10 rows instead
+    KNOWN BUGS:
+    --
+
+    NOTES:
+    clicking new row when it's partly below the screen adds 10 rows instead. Is this fine or is there a way to change this?
+    Lol what if we could "video preview" by running dolphin with the current movie
+*/
 
 namespace pianokeys
 {
     public partial class Form1 : Form
     {
         private Frame ActiveFrame;
-        private List<Frame> frameList;
-        private BindingSource frameSource;
-        private BindingListView<Frame> frameView;
+        private List<Frame> frameList; //List containing data associated with the loaded file
+        private BindingListView<Frame> frameView; //Provides filters for the frameList
+        private BindingSource frameSource; //Shows frameView to window's controls
         private DTM loadedFile;
 
         private List<Frame> clipboard;
@@ -104,6 +117,12 @@ namespace pianokeys
             frameSource.ResetCurrentItem();
         }
 
+        private void SliderValueChanged(object sender, MouseEventArgs e)
+        {
+            activeFrameBindingSource.EndEdit();
+            frameSource.ResetCurrentItem();
+        }
+
         private void frameDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
@@ -146,6 +165,7 @@ namespace pianokeys
 
         private void stopListEvents()
         {
+            frameSource.SuspendBinding();
             frameDataGridView.SuspendLayout();
             frameNavigator.SuspendLayout();
         }
@@ -153,6 +173,7 @@ namespace pianokeys
         private void continueListEvents()
         {
             frameView.Refresh();
+            frameSource.ResumeBinding();
             frameDataGridView.ResumeLayout(true);
             frameNavigator.ResumeLayout(true);
         }
@@ -199,7 +220,6 @@ namespace pianokeys
                             }
                         }
                     }
-
                     continueListEvents();
                     statusLabel.Text = "Loaded " + Path.GetFileName(path) + ".";
                 }
