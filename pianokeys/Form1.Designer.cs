@@ -232,6 +232,7 @@
             this.frameDataGridView.ShowRowErrors = false;
             this.frameDataGridView.Size = new System.Drawing.Size(780, 228);
             this.frameDataGridView.TabIndex = 1;
+            this.frameDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.frameDataGridView_CellContentClick);
             this.frameDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.frameDataGridView_RowPostPaint);
             // 
             // ST
@@ -603,6 +604,7 @@
             this.selectedFrameBox.AutoSize = true;
             this.selectedFrameBox.Controls.Add(this.tableLayoutPanel1);
             this.selectedFrameBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectedFrameBox.Enabled = false;
             this.selectedFrameBox.Location = new System.Drawing.Point(0, 0);
             this.selectedFrameBox.Name = "selectedFrameBox";
             this.selectedFrameBox.Size = new System.Drawing.Size(786, 194);
@@ -653,9 +655,10 @@
             // 
             // tableLayoutPanel8
             // 
+            this.tableLayoutPanel8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel13, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.trackBar5, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.trackBar6, 1, 1);
@@ -664,8 +667,8 @@
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(211, 152);
             this.tableLayoutPanel8.TabIndex = 7;
             // 
@@ -680,7 +683,7 @@
             0,
             0});
             this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown5.Size = new System.Drawing.Size(112, 20);
             this.numericUpDown5.TabIndex = 3;
             this.numericUpDown5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown5.Value = new decimal(new int[] {
@@ -693,11 +696,12 @@
             // trackBar5
             // 
             this.trackBar5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
-            this.trackBar5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar5.Location = new System.Drawing.Point(3, 3);
+            this.trackBar5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.trackBar5.Location = new System.Drawing.Point(0, 0);
+            this.trackBar5.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar5.Maximum = 255;
             this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(153, 30);
+            this.trackBar5.Size = new System.Drawing.Size(166, 45);
             this.trackBar5.TabIndex = 0;
             this.trackBar5.Value = 128;
             this.trackBar5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
@@ -715,12 +719,13 @@
             // trackBar6
             // 
             this.trackBar6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
-            this.trackBar6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar6.Location = new System.Drawing.Point(162, 39);
+            this.trackBar6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.trackBar6.Location = new System.Drawing.Point(166, 45);
+            this.trackBar6.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar6.Maximum = 255;
             this.trackBar6.Name = "trackBar6";
             this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar6.Size = new System.Drawing.Size(46, 110);
+            this.trackBar6.Size = new System.Drawing.Size(45, 107);
             this.trackBar6.TabIndex = 5;
             this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar6.Value = 128;
@@ -747,7 +752,7 @@
             0,
             0});
             this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown6.Size = new System.Drawing.Size(112, 20);
             this.numericUpDown6.TabIndex = 4;
             this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown6.Value = new decimal(new int[] {
@@ -803,9 +808,10 @@
             // 
             // tableLayoutPanel3
             // 
+            this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel12, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.trackBar1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.trackBar2, 1, 1);
@@ -814,9 +820,8 @@
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 152);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
@@ -832,7 +837,7 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(111, 20);
             this.numericUpDown3.TabIndex = 3;
             this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown3.Value = new decimal(new int[] {
@@ -845,11 +850,12 @@
             // trackBar1
             // 
             this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(3, 3);
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.trackBar1.Location = new System.Drawing.Point(0, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar1.Maximum = 255;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(153, 30);
+            this.trackBar1.Size = new System.Drawing.Size(165, 45);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = global::pianokeys.Properties.Settings.Default.LeftStickX;
             this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
@@ -868,12 +874,13 @@
             // trackBar2
             // 
             this.trackBar2.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LY", true));
-            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar2.Location = new System.Drawing.Point(162, 39);
+            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.trackBar2.Location = new System.Drawing.Point(165, 45);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar2.Maximum = 255;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 110);
+            this.trackBar2.Size = new System.Drawing.Size(45, 107);
             this.trackBar2.TabIndex = 5;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar2.Value = 128;
@@ -902,7 +909,7 @@
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown4.Size = new System.Drawing.Size(111, 20);
             this.numericUpDown4.TabIndex = 4;
             this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown4.Value = new decimal(new int[] {
@@ -1407,6 +1414,7 @@
             // 
             // tableLayoutPanel12
             // 
+            this.tableLayoutPanel12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel12.ColumnCount = 2;
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1414,17 +1422,18 @@
             this.tableLayoutPanel12.Controls.Add(this.numericUpDown4, 1, 1);
             this.tableLayoutPanel12.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel12.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 39);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 48);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 3;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(153, 100);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(159, 100);
             this.tableLayoutPanel12.TabIndex = 4;
             // 
             // tableLayoutPanel13
             // 
+            this.tableLayoutPanel13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel13.ColumnCount = 2;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1433,13 +1442,13 @@
             this.tableLayoutPanel13.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 39);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 48);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 3;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(153, 110);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(160, 101);
             this.tableLayoutPanel13.TabIndex = 5;
             // 
             // activeFrameBindingSource
@@ -1460,7 +1469,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Dolphin TAS Editor Deluxe";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).EndInit();
             this.gridContextMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

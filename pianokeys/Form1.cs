@@ -43,32 +43,42 @@ namespace pianokeys
             loadedFile = null;
             clipboard = new List<Frame>();
             frameSource.CurrentChanged += frameSource_CurrentChanged;
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
             frameDataGridView.DataSource = frameSource;
             frameNavigator.BindingSource = frameSource;
         }
         
+        private Frame getActiveFrame()
+        {
+            var frameSourceObj = ((ObjectView<Frame>)frameSource.Current);
+            if (frameSourceObj != null)
+                return frameSourceObj.Object;
+            return null;
+        }
 
         private void frameSource_CurrentChanged(object sender, EventArgs e)
         {
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             frameSource.EndEdit();
 
-            Frame currentFrame = ((ObjectView<Frame>)frameSource.Current).Object;
-            int index = frameList.IndexOf(currentFrame);
-            if (index != -1)
+            Frame currentFrame = getActiveFrame();
+            if (currentFrame != null)
             {
-                selectedFrameBox.Text = "Frame " + (index + 1).ToString();
-
-                activeFrameBindingSource.Clear();
-                activeFrameBindingSource.Add(currentFrame);
-                activeFrameBindingSource.EndEdit();
-                activeFrameBindingSource.ResetCurrentItem();
+                int index = frameList.IndexOf(currentFrame);
+                if (index != -1)
+                {
+                    selectedFrameBox.Text = "Frame " + (index + 1).ToString();
+                    activeFrameBindingSource.Add(currentFrame);
+                    activeFrameBindingSource.RemoveAt(0);
+                    activeFrameBindingSource.EndEdit();
+                    activeFrameBindingSource.ResetCurrentItem();
+                }
+                selectedFrameBox.Enabled = index != -1;
             }
-            selectedFrameBox.Enabled = index != -1;
+            else
+            {
+                selectedFrameBox.Enabled = false;
+            }
         }
 
         private void SliderValueChanged(object sender, EventArgs e)
@@ -77,7 +87,11 @@ namespace pianokeys
             activeFrameBindingSource.ResetCurrentItem();
             frameSource.ResetCurrentItem();
         }
-        
+
+        private void frameDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
 
         private HashSet<int> getSelectedRowsFromCells()
         {
@@ -438,6 +452,9 @@ namespace pianokeys
         {
             if (frameView != null)
             {
+                frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                frameSource.EndEdit();
+
                 switch (filterComboBox.SelectedIndex)
                 {
                     case 1:
@@ -495,5 +512,6 @@ namespace pianokeys
                 e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
             }
         }
+
     }
 }
