@@ -13,6 +13,9 @@ using Equin.ApplicationFramework;
 
 //TODO
 
+// Doubleclick checkbox fix
+// Fix inserting frames
+// Fix deleting frames
 // Replace stalling moments with progress bar/disabling controls
 // Undo/Redo
 // Lol what if we could "video preview" by running dolphin with the current movie
@@ -54,6 +57,23 @@ namespace pianokeys
             if (frameSourceObj != null)
                 return frameSourceObj.Object;
             return null;
+        }
+
+        private List<Frame> getGridSelectedFrames()
+        {
+            List<Frame> frames = new List<Frame>();
+
+            var selectedRows = getSelectedRowsFromCells();
+            foreach (int i in selectedRows)
+            {
+                var gridRow = frameDataGridView.Rows[i];
+                var gridItem = (ObjectView<Frame>)gridRow.DataBoundItem;
+                if (gridItem != null)
+                {
+                    frames.Add(gridItem.Object);
+                }
+            }
+            return frames;
         }
 
         private void frameSource_CurrentChanged(object sender, EventArgs e)
@@ -341,6 +361,7 @@ namespace pianokeys
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0)
                 frameList.Insert(selectedRowList.Min(), new Frame());
+            frameView.Refresh();
         }
 
         private void insertAfterMenuItem_Click(object sender, EventArgs e)
@@ -348,6 +369,7 @@ namespace pianokeys
             HashSet<int> selectedRowList = getSelectedRowsFromCells();
             if (selectedRowList.Count > 0)
                 frameList.Insert(selectedRowList.Max() + 1, new Frame());
+            frameView.Refresh();
         }
 
         private void insertMultipleMenuItem_Click(object sender, EventArgs e)
@@ -370,20 +392,16 @@ namespace pianokeys
                     insertNewFrame(insertIndex, insDialog.FrameCount);
                 }
             }
+            frameView.Refresh();
 
         }
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
         {
-            var selectedRowList = getSelectedRowsFromCells();
-            var toDelete = new List<DataGridViewRow>();
-            foreach (var index in selectedRowList)
+            var itemsToDelete = getGridSelectedFrames();
+            foreach (Frame f in itemsToDelete)
             {
-                toDelete.Add(frameDataGridView.Rows[index]);
-            }
-            foreach (DataGridViewRow row in toDelete)
-            {
-                frameDataGridView.Rows.Remove(row);
+                frameSource.Remove(f);
             }
         }
 

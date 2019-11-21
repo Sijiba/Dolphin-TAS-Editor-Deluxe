@@ -442,14 +442,14 @@
             this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
             this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(213, 230);
+            this.gridContextMenu.Size = new System.Drawing.Size(228, 230);
             this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(227, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
@@ -457,7 +457,7 @@
             // 
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
+            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(227, 22);
             this.redoToolStripMenuItem1.Text = "Redo";
             this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
@@ -465,7 +465,7 @@
             // 
             this.copyFramesToolStripMenuItem.Name = "copyFramesToolStripMenuItem";
             this.copyFramesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.copyFramesToolStripMenuItem.Text = "Copy Frame(s)";
             this.copyFramesToolStripMenuItem.Click += new System.EventHandler(this.copyFramesToolStripMenuItem_Click);
             // 
@@ -473,7 +473,7 @@
             // 
             this.pasteAfterToolStripMenuItem.Name = "pasteAfterToolStripMenuItem";
             this.pasteAfterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.pasteAfterToolStripMenuItem.Text = "Paste After";
             this.pasteAfterToolStripMenuItem.Click += new System.EventHandler(this.pasteAfterToolStripMenuItem_Click);
             // 
@@ -482,47 +482,48 @@
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.pasteToolStripMenuItem.Text = "Paste Before";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteBeforeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
             // 
             // insertAfterMenuItem
             // 
             this.insertAfterMenuItem.Name = "insertAfterMenuItem";
-            this.insertAfterMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.insertAfterMenuItem.Size = new System.Drawing.Size(227, 22);
             this.insertAfterMenuItem.Text = "Insert Frame After";
             this.insertAfterMenuItem.Click += new System.EventHandler(this.insertAfterMenuItem_Click);
             // 
             // insertBeforeMenuItem
             // 
             this.insertBeforeMenuItem.Name = "insertBeforeMenuItem";
-            this.insertBeforeMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.insertBeforeMenuItem.Size = new System.Drawing.Size(227, 22);
             this.insertBeforeMenuItem.Text = "Insert Frame Before";
             this.insertBeforeMenuItem.Click += new System.EventHandler(this.insertBeforeMenuItem_Click);
             // 
             // insertMultipleMenuItem
             // 
             this.insertMultipleMenuItem.Name = "insertMultipleMenuItem";
-            this.insertMultipleMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.insertMultipleMenuItem.Size = new System.Drawing.Size(227, 22);
             this.insertMultipleMenuItem.Text = "Insert Frames...";
             this.insertMultipleMenuItem.Click += new System.EventHandler(this.insertMultipleMenuItem_Click);
             // 
             // deleteMenuItem
             // 
             this.deleteMenuItem.Name = "deleteMenuItem";
-            this.deleteMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.deleteMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteMenuItem.Size = new System.Drawing.Size(227, 22);
             this.deleteMenuItem.Text = "Delete Selected Frame(s)";
             this.deleteMenuItem.Click += new System.EventHandler(this.deleteMenuItem_Click);
             // 
             // clearSelectedValuesToolStripMenuItem
             // 
             this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
-            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
             this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
             // 
