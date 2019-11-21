@@ -18,6 +18,7 @@ using Equin.ApplicationFramework;
 // Undo/Redo
 // Lol what if we could "video preview" by running dolphin with the current movie
 // Bugfix: Active section checkboxes take 2 clicks to start changing???
+// Note: clicking new row when it's partly below the screen adds 10 rows instead
 
 namespace pianokeys
 {
@@ -76,7 +77,6 @@ namespace pianokeys
 
         private void frameSource_CurrentChanged(object sender, EventArgs e)
         {
-            frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             frameSource.EndEdit();
 
             Frame currentFrame = getActiveFrame();
