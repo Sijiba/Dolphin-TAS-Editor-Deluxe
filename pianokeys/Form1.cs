@@ -14,8 +14,6 @@ using Equin.ApplicationFramework;
 //TODO
 
 // Doubleclick checkbox fix
-// Fix inserting frames
-// Fix deleting frames
 // Replace stalling moments with progress bar/disabling controls
 // Undo/Redo
 // Lol what if we could "video preview" by running dolphin with the current movie
