@@ -23,7 +23,8 @@ namespace pianokeys
     public partial class Form1 : Form
     {
         private Frame ActiveFrame;
-        private BindingList<Frame> frameList;
+        private List<Frame> frameList;
+        private BindingSource frameSource;
         private BindingListView<Frame> frameView;
         private DTM loadedFile;
 
@@ -36,49 +37,47 @@ namespace pianokeys
             ActiveFrame = new Frame();
             var t = new Frame();
             activeFrameBindingSource.Add(t);
-            frameList = new BindingList<Frame>();
+            frameList = new List<Frame>();
             frameView = new BindingListView<Frame>(frameList);
+            frameSource = new BindingSource(frameView, null);
             loadedFile = null;
             clipboard = new List<Frame>();
+            frameSource.CurrentChanged += frameSource_CurrentChanged;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            frameDataGridView.DataSource = frameView;
-            frameNavigator.BindingSource = new BindingSource(frameList, null);
+            frameDataGridView.DataSource = frameSource;
+            frameNavigator.BindingSource = frameSource;
         }
+        
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void frameSource_CurrentChanged(object sender, EventArgs e)
         {
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            if (e.RowIndex >= 0 && e.RowIndex < frameList.Count)
+            frameSource.EndEdit();
+
+            Frame currentFrame = ((ObjectView<Frame>)frameSource.Current).Object;
+            int index = frameList.IndexOf(currentFrame);
+            if (index != -1)
             {
-                var row = frameDataGridView.Rows[e.RowIndex].Index;
-                Frame activeFrame = frameList[row];
-                showActiveFrame(activeFrame, row);
+                selectedFrameBox.Text = "Frame " + (index + 1).ToString();
+
+                activeFrameBindingSource.Clear();
+                activeFrameBindingSource.Add(currentFrame);
+                activeFrameBindingSource.EndEdit();
+                activeFrameBindingSource.ResetCurrentItem();
             }
-            else
-            {
-                selectedFrameBox.Enabled = false;
-            }
+            selectedFrameBox.Enabled = index != -1;
         }
 
         private void SliderValueChanged(object sender, EventArgs e)
         {
             activeFrameBindingSource.EndEdit();
             activeFrameBindingSource.ResetCurrentItem();
+            frameSource.ResetCurrentItem();
         }
-
-        private void showActiveFrame(Frame t, int frameNumber)
-        {
-            selectedFrameBox.Enabled = true;
-            ActiveFrame = t;
-            selectedFrameBox.Text = "Frame " + frameNumber.ToString();
-            activeFrameBindingSource.Clear();
-            activeFrameBindingSource.Add(t);
-            activeFrameBindingSource.EndEdit();
-            activeFrameBindingSource.ResetCurrentItem();
-        }
+        
 
         private HashSet<int> getSelectedRowsFromCells()
         {
@@ -115,39 +114,17 @@ namespace pianokeys
         }
 
 
-        private void dataGridSelectionChanged(object sender, EventArgs e)
-        {
-            //If only one frame is selected, set it as the active display frame
-            //else disable upper panel
-            bool enableActivePanel = true;
-
-            DataGridViewSelectedCellCollection selection = frameDataGridView.SelectedCells;
-            int row = singleSelectedRow();
-            if (row >= 0 && row < frameList.Count)
-            {
-                Frame activeFrame = frameList.ElementAt(row);
-                showActiveFrame(activeFrame, row);
-                enableActivePanel = true;
-            }
-            else
-            {
-                enableActivePanel = false;
-            }
-
-            selectedFrameBox.Enabled = enableActivePanel;
-        }
-
         private void stopListEvents()
         {
             frameDataGridView.SuspendLayout();
-            frameList.RaiseListChangedEvents = false;
+            frameNavigator.SuspendLayout();
         }
 
         private void continueListEvents()
         {
-            frameList.RaiseListChangedEvents = true;
             frameView.Refresh();
             frameDataGridView.ResumeLayout(true);
+            frameNavigator.ResumeLayout(true);
         }
         
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -465,13 +442,16 @@ namespace pianokeys
                 {
                     case 1:
                         frameView.ApplyFilter(delegate (Frame f) { return f.Note.Length > 0; });
+                        frameSource.AllowNew = false;
                         break;
                     case 2:
                         Frame defaultFrame = new Frame();
                         frameView.ApplyFilter(delegate (Frame f) { return !(f.Equals(defaultFrame)); });
+                        frameSource.AllowNew = false;
                         break;
                     default:
                         frameView.RemoveFilter();
+                        frameSource.AllowNew = true;
                         break;
                 }
             }
@@ -490,9 +470,19 @@ namespace pianokeys
         private void frameDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             var grid = sender as DataGridView;
-            if (e.RowIndex != grid.RowCount - 1)
+            if ((!frameSource.AllowNew || e.RowIndex != grid.RowCount - 1))
             {
                 var rowIdx = (e.RowIndex + 1).ToString();
+                ObjectView<Frame> frameObj = (ObjectView<Frame>)grid.Rows[e.RowIndex].DataBoundItem;
+                var frame = frameObj.Object;
+                if (frame != null)
+                {
+                    int index = frameList.IndexOf(frame);
+                    if (index >= 0)
+                        rowIdx = (index + 1).ToString();
+                }
+                else
+                    rowIdx = "";
 
                 var centerFormat = new StringFormat()
                 {

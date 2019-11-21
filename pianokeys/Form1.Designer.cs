@@ -31,13 +31,32 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.frameDataGridView = new System.Windows.Forms.DataGridView();
+            this.ST = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.A = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.B = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Y = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DL = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DR = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DU = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.L = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.R = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.LP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.undoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,11 +82,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.trackBar5 = new System.Windows.Forms.TrackBar();
             this.label7 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.trackBar6 = new System.Windows.Forms.TrackBar();
             this.label8 = new System.Windows.Forms.Label();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
@@ -76,11 +93,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
@@ -121,48 +136,27 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.filterComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.statusLabel = new System.Windows.Forms.ToolStripLabel();
-            this.ST = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.A = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.B = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.X = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Y = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DL = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DR = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DU = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.L = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.R = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.LP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.selectedFrameBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-            this.tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
@@ -179,6 +173,8 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).BeginInit();
             this.frameNavigator.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -236,9 +232,198 @@
             this.frameDataGridView.ShowRowErrors = false;
             this.frameDataGridView.Size = new System.Drawing.Size(780, 228);
             this.frameDataGridView.TabIndex = 1;
-            this.frameDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.frameDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.frameDataGridView_RowPostPaint);
-            this.frameDataGridView.SelectionChanged += new System.EventHandler(this.dataGridSelectionChanged);
+            // 
+            // ST
+            // 
+            this.ST.DataPropertyName = "ST";
+            this.ST.HeaderText = "ST";
+            this.ST.Name = "ST";
+            this.ST.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ST.ToolTipText = "Start";
+            this.ST.Width = 30;
+            // 
+            // A
+            // 
+            this.A.DataPropertyName = "A";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.A.DefaultCellStyle = dataGridViewCellStyle1;
+            this.A.HeaderText = "A";
+            this.A.Name = "A";
+            this.A.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.A.Width = 30;
+            // 
+            // B
+            // 
+            this.B.DataPropertyName = "B";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.NullValue = false;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.B.DefaultCellStyle = dataGridViewCellStyle2;
+            this.B.HeaderText = "B";
+            this.B.Name = "B";
+            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.B.Width = 30;
+            // 
+            // X
+            // 
+            this.X.DataPropertyName = "X";
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.X.Width = 30;
+            // 
+            // Y
+            // 
+            this.Y.DataPropertyName = "Y";
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            this.Y.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Y.Width = 30;
+            // 
+            // DL
+            // 
+            this.DL.DataPropertyName = "DL";
+            this.DL.HeaderText = "DL";
+            this.DL.Name = "DL";
+            this.DL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DL.ToolTipText = "D-Pad Left";
+            this.DL.Width = 30;
+            // 
+            // DR
+            // 
+            this.DR.DataPropertyName = "DR";
+            this.DR.HeaderText = "DR";
+            this.DR.Name = "DR";
+            this.DR.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DR.ToolTipText = "D-Pad Right";
+            this.DR.Width = 30;
+            // 
+            // DU
+            // 
+            this.DU.DataPropertyName = "DU";
+            this.DU.HeaderText = "DU";
+            this.DU.Name = "DU";
+            this.DU.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DU.ToolTipText = "D-Pad Up";
+            this.DU.Width = 30;
+            // 
+            // DD
+            // 
+            this.DD.DataPropertyName = "DD";
+            this.DD.HeaderText = "DD";
+            this.DD.Name = "DD";
+            this.DD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DD.ToolTipText = "D-Pad Down";
+            this.DD.Width = 30;
+            // 
+            // Z
+            // 
+            this.Z.DataPropertyName = "Z";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.NullValue = false;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Z.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
+            this.Z.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Z.Width = 30;
+            // 
+            // L
+            // 
+            this.L.DataPropertyName = "L";
+            this.L.HeaderText = "L";
+            this.L.Name = "L";
+            this.L.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.L.Width = 30;
+            // 
+            // R
+            // 
+            this.R.DataPropertyName = "R";
+            this.R.HeaderText = "R";
+            this.R.Name = "R";
+            this.R.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.R.Width = 30;
+            // 
+            // LP
+            // 
+            this.LP.DataPropertyName = "LP";
+            this.LP.HeaderText = "LP";
+            this.LP.MaxInputLength = 3;
+            this.LP.Name = "LP";
+            this.LP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LP.ToolTipText = "L Pressure";
+            this.LP.Width = 30;
+            // 
+            // RP
+            // 
+            this.RP.DataPropertyName = "RP";
+            this.RP.HeaderText = "RP";
+            this.RP.MaxInputLength = 3;
+            this.RP.Name = "RP";
+            this.RP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.RP.ToolTipText = "R Pressure";
+            this.RP.Width = 30;
+            // 
+            // LX
+            // 
+            this.LX.DataPropertyName = "LX";
+            this.LX.HeaderText = "LX";
+            this.LX.MaxInputLength = 3;
+            this.LX.Name = "LX";
+            this.LX.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.LX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LX.ToolTipText = "Left Stick X";
+            this.LX.Width = 30;
+            // 
+            // LY
+            // 
+            this.LY.DataPropertyName = "LY";
+            this.LY.HeaderText = "LY";
+            this.LY.MaxInputLength = 3;
+            this.LY.Name = "LY";
+            this.LY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LY.ToolTipText = "Left Stick Y";
+            this.LY.Width = 30;
+            // 
+            // CX
+            // 
+            this.CX.DataPropertyName = "CX";
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CX.DefaultCellStyle = dataGridViewCellStyle4;
+            this.CX.HeaderText = "CX";
+            this.CX.MaxInputLength = 3;
+            this.CX.Name = "CX";
+            this.CX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CX.ToolTipText = "C-Stick X";
+            this.CX.Width = 30;
+            // 
+            // CY
+            // 
+            this.CY.DataPropertyName = "CY";
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CY.DefaultCellStyle = dataGridViewCellStyle5;
+            this.CY.HeaderText = "CY";
+            this.CY.MaxInputLength = 3;
+            this.CY.Name = "CY";
+            this.CY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CY.ToolTipText = "C-Stick Y";
+            this.CY.Width = 30;
+            // 
+            // NoteColumn
+            // 
+            this.NoteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NoteColumn.DataPropertyName = "Note";
+            this.NoteColumn.HeaderText = "Note";
+            this.NoteColumn.Name = "NoteColumn";
+            this.NoteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // gridContextMenu
             // 
@@ -418,7 +603,6 @@
             this.selectedFrameBox.AutoSize = true;
             this.selectedFrameBox.Controls.Add(this.tableLayoutPanel1);
             this.selectedFrameBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedFrameBox.Enabled = false;
             this.selectedFrameBox.Location = new System.Drawing.Point(0, 0);
             this.selectedFrameBox.Name = "selectedFrameBox";
             this.selectedFrameBox.Size = new System.Drawing.Size(786, 194);
@@ -470,36 +654,20 @@
             // tableLayoutPanel8
             // 
             this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel9, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel10, 1, 1);
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel13, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.trackBar5, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.trackBar6, 1, 1);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(212, 22);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(211, 152);
             this.tableLayoutPanel8.TabIndex = 7;
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.numericUpDown5, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.trackBar5, 0, 1);
-            this.tableLayoutPanel9.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(125, 51);
-            this.tableLayoutPanel9.TabIndex = 2;
             // 
             // numericUpDown5
             // 
@@ -512,7 +680,7 @@
             0,
             0});
             this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDown5.Size = new System.Drawing.Size(105, 20);
             this.numericUpDown5.TabIndex = 3;
             this.numericUpDown5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown5.Value = new decimal(new int[] {
@@ -524,13 +692,12 @@
             // 
             // trackBar5
             // 
-            this.tableLayoutPanel9.SetColumnSpan(this.trackBar5, 2);
             this.trackBar5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
             this.trackBar5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar5.Location = new System.Drawing.Point(3, 28);
+            this.trackBar5.Location = new System.Drawing.Point(3, 3);
             this.trackBar5.Maximum = 255;
             this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(119, 20);
+            this.trackBar5.Size = new System.Drawing.Size(153, 30);
             this.trackBar5.TabIndex = 0;
             this.trackBar5.Value = 128;
             this.trackBar5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
@@ -538,41 +705,22 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 25);
+            this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 1;
             this.label7.Text = "X-Axis";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel10.Controls.Add(this.trackBar6, 0, 0);
-            this.tableLayoutPanel10.Controls.Add(this.label8, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.numericUpDown6, 1, 1);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(134, 60);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(74, 89);
-            this.tableLayoutPanel10.TabIndex = 3;
             // 
             // trackBar6
             // 
             this.trackBar6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
             this.trackBar6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar6.Location = new System.Drawing.Point(3, 3);
+            this.trackBar6.Location = new System.Drawing.Point(162, 39);
             this.trackBar6.Maximum = 255;
             this.trackBar6.Name = "trackBar6";
             this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tableLayoutPanel10.SetRowSpan(this.trackBar6, 2);
-            this.trackBar6.Size = new System.Drawing.Size(21, 83);
+            this.trackBar6.Size = new System.Drawing.Size(46, 110);
             this.trackBar6.TabIndex = 5;
             this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar6.Value = 128;
@@ -581,7 +729,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 0);
+            this.label8.Location = new System.Drawing.Point(3, 26);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 1;
@@ -591,14 +739,15 @@
             // 
             this.numericUpDown6.AutoSize = true;
             this.numericUpDown6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
-            this.numericUpDown6.Location = new System.Drawing.Point(30, 16);
+            this.numericUpDown6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDown6.Location = new System.Drawing.Point(45, 29);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDown6.Size = new System.Drawing.Size(105, 20);
             this.numericUpDown6.TabIndex = 4;
             this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown6.Value = new decimal(new int[] {
@@ -655,37 +804,21 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel6, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel7, 1, 1);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel12, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.trackBar1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.trackBar2, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(1, 22);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.75758F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 152);
             this.tableLayoutPanel3.TabIndex = 4;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.numericUpDown3, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.trackBar1, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(125, 51);
-            this.tableLayoutPanel6.TabIndex = 2;
             // 
             // numericUpDown3
             // 
@@ -699,7 +832,7 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(105, 20);
             this.numericUpDown3.TabIndex = 3;
             this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown3.Value = new decimal(new int[] {
@@ -711,13 +844,12 @@
             // 
             // trackBar1
             // 
-            this.tableLayoutPanel6.SetColumnSpan(this.trackBar1, 2);
             this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(3, 28);
+            this.trackBar1.Location = new System.Drawing.Point(3, 3);
             this.trackBar1.Maximum = 255;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(119, 20);
+            this.trackBar1.Size = new System.Drawing.Size(153, 30);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = global::pianokeys.Properties.Settings.Default.LeftStickX;
             this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
@@ -728,38 +860,20 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 25);
+            this.label5.Size = new System.Drawing.Size(36, 26);
             this.label5.TabIndex = 1;
             this.label5.Text = "X-Axis";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel7.Controls.Add(this.trackBar2, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label6, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.numericUpDown4, 1, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(134, 60);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(73, 89);
-            this.tableLayoutPanel7.TabIndex = 3;
             // 
             // trackBar2
             // 
             this.trackBar2.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LY", true));
             this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar2.Location = new System.Drawing.Point(3, 3);
+            this.trackBar2.Location = new System.Drawing.Point(162, 39);
             this.trackBar2.Maximum = 255;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tableLayoutPanel7.SetRowSpan(this.trackBar2, 2);
-            this.trackBar2.Size = new System.Drawing.Size(20, 83);
+            this.trackBar2.Size = new System.Drawing.Size(45, 110);
             this.trackBar2.TabIndex = 5;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar2.Value = 128;
@@ -768,24 +882,27 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 0);
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 26);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(36, 13);
+            this.label6.Size = new System.Drawing.Size(36, 26);
             this.label6.TabIndex = 1;
             this.label6.Text = "Y-Axis";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.AutoSize = true;
             this.numericUpDown4.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LY", true));
-            this.numericUpDown4.Location = new System.Drawing.Point(29, 16);
+            this.numericUpDown4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDown4.Location = new System.Drawing.Point(45, 29);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDown4.Size = new System.Drawing.Size(105, 20);
             this.numericUpDown4.TabIndex = 4;
             this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown4.Value = new decimal(new int[] {
@@ -1272,11 +1389,6 @@
             this.filterComboBox.Size = new System.Drawing.Size(121, 25);
             this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
             // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "dtm";
-            this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -1288,196 +1400,47 @@
             this.statusLabel.Size = new System.Drawing.Size(97, 22);
             this.statusLabel.Text = "Pick a file to edit.";
             // 
-            // ST
+            // saveFileDialog1
             // 
-            this.ST.DataPropertyName = "ST";
-            this.ST.HeaderText = "ST";
-            this.ST.Name = "ST";
-            this.ST.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ST.ToolTipText = "Start";
-            this.ST.Width = 30;
+            this.saveFileDialog1.DefaultExt = "dtm";
+            this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
-            // A
+            // tableLayoutPanel12
             // 
-            this.A.DataPropertyName = "A";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.NullValue = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.A.DefaultCellStyle = dataGridViewCellStyle1;
-            this.A.HeaderText = "A";
-            this.A.Name = "A";
-            this.A.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.A.Width = 30;
+            this.tableLayoutPanel12.ColumnCount = 2;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.numericUpDown3, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.numericUpDown4, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 39);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 3;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(153, 100);
+            this.tableLayoutPanel12.TabIndex = 4;
             // 
-            // B
+            // tableLayoutPanel13
             // 
-            this.B.DataPropertyName = "B";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.NullValue = false;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.B.DefaultCellStyle = dataGridViewCellStyle2;
-            this.B.HeaderText = "B";
-            this.B.Name = "B";
-            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.B.Width = 30;
-            // 
-            // X
-            // 
-            this.X.DataPropertyName = "X";
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            this.X.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.X.Width = 30;
-            // 
-            // Y
-            // 
-            this.Y.DataPropertyName = "Y";
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            this.Y.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Y.Width = 30;
-            // 
-            // DL
-            // 
-            this.DL.DataPropertyName = "DL";
-            this.DL.HeaderText = "DL";
-            this.DL.Name = "DL";
-            this.DL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DL.ToolTipText = "D-Pad Left";
-            this.DL.Width = 30;
-            // 
-            // DR
-            // 
-            this.DR.DataPropertyName = "DR";
-            this.DR.HeaderText = "DR";
-            this.DR.Name = "DR";
-            this.DR.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DR.ToolTipText = "D-Pad Right";
-            this.DR.Width = 30;
-            // 
-            // DU
-            // 
-            this.DU.DataPropertyName = "DU";
-            this.DU.HeaderText = "DU";
-            this.DU.Name = "DU";
-            this.DU.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DU.ToolTipText = "D-Pad Up";
-            this.DU.Width = 30;
-            // 
-            // DD
-            // 
-            this.DD.DataPropertyName = "DD";
-            this.DD.HeaderText = "DD";
-            this.DD.Name = "DD";
-            this.DD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DD.ToolTipText = "D-Pad Down";
-            this.DD.Width = 30;
-            // 
-            // Z
-            // 
-            this.Z.DataPropertyName = "Z";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.NullValue = false;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Z.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
-            this.Z.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Z.Width = 30;
-            // 
-            // L
-            // 
-            this.L.DataPropertyName = "L";
-            this.L.HeaderText = "L";
-            this.L.Name = "L";
-            this.L.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.L.Width = 30;
-            // 
-            // R
-            // 
-            this.R.DataPropertyName = "R";
-            this.R.HeaderText = "R";
-            this.R.Name = "R";
-            this.R.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.R.Width = 30;
-            // 
-            // LP
-            // 
-            this.LP.DataPropertyName = "LP";
-            this.LP.HeaderText = "LP";
-            this.LP.MaxInputLength = 3;
-            this.LP.Name = "LP";
-            this.LP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LP.ToolTipText = "L Pressure";
-            this.LP.Width = 30;
-            // 
-            // RP
-            // 
-            this.RP.DataPropertyName = "RP";
-            this.RP.HeaderText = "RP";
-            this.RP.MaxInputLength = 3;
-            this.RP.Name = "RP";
-            this.RP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.RP.ToolTipText = "R Pressure";
-            this.RP.Width = 30;
-            // 
-            // LX
-            // 
-            this.LX.DataPropertyName = "LX";
-            this.LX.HeaderText = "LX";
-            this.LX.MaxInputLength = 3;
-            this.LX.Name = "LX";
-            this.LX.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.LX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LX.ToolTipText = "Left Stick X";
-            this.LX.Width = 30;
-            // 
-            // LY
-            // 
-            this.LY.DataPropertyName = "LY";
-            this.LY.HeaderText = "LY";
-            this.LY.MaxInputLength = 3;
-            this.LY.Name = "LY";
-            this.LY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LY.ToolTipText = "Left Stick Y";
-            this.LY.Width = 30;
-            // 
-            // CX
-            // 
-            this.CX.DataPropertyName = "CX";
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CX.DefaultCellStyle = dataGridViewCellStyle4;
-            this.CX.HeaderText = "CX";
-            this.CX.MaxInputLength = 3;
-            this.CX.Name = "CX";
-            this.CX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CX.ToolTipText = "C-Stick X";
-            this.CX.Width = 30;
-            // 
-            // CY
-            // 
-            this.CY.DataPropertyName = "CY";
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CY.DefaultCellStyle = dataGridViewCellStyle5;
-            this.CY.HeaderText = "CY";
-            this.CY.MaxInputLength = 3;
-            this.CY.Name = "CY";
-            this.CY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CY.ToolTipText = "C-Stick Y";
-            this.CY.Width = 30;
-            // 
-            // NoteColumn
-            // 
-            this.NoteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NoteColumn.DataPropertyName = "Note";
-            this.NoteColumn.HeaderText = "Note";
-            this.NoteColumn.Name = "NoteColumn";
-            this.NoteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.numericUpDown5, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.numericUpDown6, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 39);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 3;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(153, 110);
+            this.tableLayoutPanel13.TabIndex = 5;
             // 
             // activeFrameBindingSource
             // 
@@ -1507,21 +1470,15 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1544,6 +1501,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).EndInit();
             this.frameNavigator.ResumeLayout(false);
             this.frameNavigator.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1582,19 +1543,15 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TrackBar trackBar3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.TrackBar trackBar5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.TrackBar trackBar6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
@@ -1661,6 +1618,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CY;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoteColumn;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
     }
 }
 
