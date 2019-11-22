@@ -103,13 +103,25 @@ namespace pianokeys
                     activeFrameBindingSource.ResetCurrentItem();
                 }
                 selectedFrameBox.Enabled = index != -1;
+                
+                var countVisible = frameDataGridView.DisplayedRowCount(false);
+                var firstVisible = frameDataGridView.FirstDisplayedScrollingRowIndex;
+                var currentPos = frameSource.Position;
+                if (currentPos < firstVisible)
+                {
+                    frameDataGridView.FirstDisplayedScrollingRowIndex = currentPos;
+                }
+                else if (currentPos >= firstVisible + countVisible)
+                {
+                    frameDataGridView.FirstDisplayedScrollingRowIndex = currentPos - countVisible + 1;
+                }
             }
             else
             {
                 selectedFrameBox.Enabled = false;
             }
         }
-
+        
         private void SliderValueChanged(object sender, EventArgs e)
         {
             activeFrameBindingSource.EndEdit();
@@ -197,7 +209,7 @@ namespace pianokeys
                     loadedFile = inputFile;
                     stopListEvents();
                     frameList.Clear();
-
+                    filterComboBox.SelectedIndex = 0;
                     foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
                     {
                         frameList.Add(new Frame(datum));
@@ -488,6 +500,7 @@ namespace pianokeys
             {
                 frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 frameSource.EndEdit();
+                var currentFrame = getActiveFrame();
 
                 switch (filterComboBox.SelectedIndex)
                 {
@@ -505,6 +518,10 @@ namespace pianokeys
                         frameSource.AllowNew = true;
                         break;
                 }
+
+                var newPos = frameSource.List.IndexOf(currentFrame);
+                if (newPos >= 0)
+                    frameSource.Position = newPos;
             }
         }
 
