@@ -14,17 +14,19 @@ using Equin.ApplicationFramework;
 /*  TODO
     FEATURES:
     Navigate to next frame with specific button values/containing notes
-    Undo/Redo
+    Copy/Paste working between instances of pianokeys
     Disable controls while no file is loaded (or if no game is specified?)
-    File > Exit
+    Call exit stuff on pressing window X
+    Undo/Redo
     
     CLEANUP:
+    Deleting multiple frames takes a long time
     Try to condense usage of frameList, frameSource, frameView, and frameDataGridView into fewer private variables.
     Replace stalling moments with progress bar/disabling controls
     Move heavy tasks to worker thread if necessary
 
     KNOWN BUGS:
-    --
+    Crash with filter and loading new files?
 
     NOTES:
     clicking new row when it's partly below the screen adds 10 rows instead. Is this fine or is there a way to change this?
@@ -63,7 +65,12 @@ namespace pianokeys
         
         private Frame getActiveFrame()
         {
-            var frameSourceObj = ((ObjectView<Frame>)frameSource.Current);
+            ObjectView<Frame> frameSourceObj = null;
+            try
+            {
+                frameSourceObj = ((ObjectView<Frame>)frameSource.Current);
+            }
+            catch { }
             if (frameSourceObj != null)
                 return frameSourceObj.Object;
             return null;
@@ -73,7 +80,15 @@ namespace pianokeys
         {
             List<Frame> frames = new List<Frame>();
 
-            var selectedRows = getSelectedRowsFromCells();
+            var selection = frameDataGridView.SelectedCells;
+            HashSet<int> selectedRows = new HashSet<int>();
+            foreach (DataGridViewCell selectedThing in selection)
+            {
+                int index = selectedThing.OwningRow.Index;
+                if (index < frameDataGridView.Rows.Count - 1)
+                    selectedRows.Add(index);
+            }
+            
             foreach (int i in selectedRows)
             {
                 var gridRow = frameDataGridView.Rows[i];
@@ -140,17 +155,18 @@ namespace pianokeys
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
-        private HashSet<int> getSelectedRowsFromCells()
+        private HashSet<int> getSelectedFrameIndices()
         {
-            var selection = frameDataGridView.SelectedCells;
-            HashSet<int> selectedRowList = new HashSet<int>();
-            foreach (DataGridViewCell selectedThing in selection)
+            var frameIndices = new HashSet<int>();
+            var selectedFrames = getGridSelectedFrames();
+            foreach (Frame frame in selectedFrames)
             {
-                int index = selectedThing.OwningRow.Index;
-                if (index < frameDataGridView.Rows.Count - 1)
-                    selectedRowList.Add(index);
+                int index = frameList.IndexOf(frame);
+                if (index != -1)
+                    frameIndices.Add(index);
             }
-            return selectedRowList;
+
+            return frameIndices;
         }
 
         private int singleSelectedRow()
@@ -208,8 +224,8 @@ namespace pianokeys
                 {
                     loadedFile = inputFile;
                     stopListEvents();
-                    frameList.Clear();
                     filterComboBox.SelectedIndex = 0;
+                    frameList.Clear();
                     foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
                     {
                         frameList.Add(new Frame(datum));
@@ -234,6 +250,8 @@ namespace pianokeys
                     }
                     continueListEvents();
                     statusLabel.Text = "Loaded " + Path.GetFileName(path) + ".";
+
+                    frameDataGridView.Enabled = true;
                 }
             }
             
@@ -284,7 +302,7 @@ namespace pianokeys
                     }
                     msg += " and its notes";
                 }
-                msg += ".";
+                msg += " at " + DateTime.Now.ToShortTimeString() + ".";
 
                 statusLabel.Text = msg;
             }
@@ -321,7 +339,7 @@ namespace pianokeys
 
         private void gridContextMenu_Opening_1(object sender, CancelEventArgs e)
         {
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
 
             bool singleRowSelected = selectedRowList.Count == 1;
             bool anyRowsSelected = selectedRowList.Count > 0;
@@ -345,7 +363,7 @@ namespace pianokeys
         private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selection = frameDataGridView.SelectedCells;
-            if (singleSelectedRow() != -1)
+            if (getSelectedFrameIndices().Count > 0)
             {
                 foreach (DataGridViewCell cell in selection)
                 {
@@ -367,61 +385,49 @@ namespace pianokeys
                     }
                 }
             }
-
+            frameView.Refresh();
         }
 
         private void insertNewFrame(int pos, uint count, Frame baseFrame = null)
         {
             baseFrame = baseFrame ?? new Frame();
-
-            if (count > 1)
-                stopListEvents();
-
+            
             for (int i = 0; i < count; i++)
-                frameList.Insert(pos, baseFrame);
+                frameList.Insert(pos, new Frame(baseFrame));
 
-            if (count > 1)
-                continueListEvents();
+            frameView.Refresh();
         }
 
         private void insertBeforeMenuItem_Click(object sender, EventArgs e)
         {
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
             if (selectedRowList.Count > 0)
-                frameList.Insert(selectedRowList.Min(), new Frame());
-            frameView.Refresh();
+                insertNewFrame(selectedRowList.Min(), 1);
         }
 
         private void insertAfterMenuItem_Click(object sender, EventArgs e)
         {
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
             if (selectedRowList.Count > 0)
-                frameList.Insert(selectedRowList.Max() + 1, new Frame());
-            frameView.Refresh();
+                insertNewFrame(selectedRowList.Max() + 1, 1);
         }
 
         private void insertMultipleMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO prompt for a number of rows and whether to add them before or
+            // prompt for a number of rows and whether to add them before or
             // after the selected row(s)
-
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
             if (selectedRowList.Count > 0)
             {
                 var insDialog = new MultiFrameInsertDialog();
                 if (insDialog.ShowDialog() == DialogResult.OK)
                 {
-                    int insertIndex = 0;
                     if (insDialog.InsertFramesAfter)
-                        insertIndex = selectedRowList.Max() + 1;
+                        insertNewFrame(selectedRowList.Max() + 1, insDialog.FrameCount);
                     else
-                        insertIndex = selectedRowList.Min();
-
-                    insertNewFrame(insertIndex, insDialog.FrameCount);
+                        insertNewFrame(selectedRowList.Min(), insDialog.FrameCount);
                 }
             }
-            frameView.Refresh();
-
         }
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
@@ -449,7 +455,7 @@ namespace pianokeys
         private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // copy selected rows to clipboard
-            HashSet<int> selectedRows = getSelectedRowsFromCells();
+            HashSet<int> selectedRows = getSelectedFrameIndices();
 
             if (selectedRows.Count > 0)
             {
@@ -464,7 +470,7 @@ namespace pianokeys
         private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // paste rows before selection
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {
                 stopListEvents();
@@ -481,7 +487,7 @@ namespace pianokeys
         private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // paste rows after selection, or at the end of the file
-            HashSet<int> selectedRowList = getSelectedRowsFromCells();
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
             if (selectedRowList.Count > 0 && clipboard.Count > 0)
             {
                 stopListEvents();
@@ -505,12 +511,25 @@ namespace pianokeys
                 switch (filterComboBox.SelectedIndex)
                 {
                     case 1:
+                        //Frame has a note
                         frameView.ApplyFilter(delegate (Frame f) { return f.Note.Length > 0; });
                         frameSource.AllowNew = false;
                         break;
                     case 2:
+                        //Input is empty (neutral sticks, no buttons, no pressure)
                         Frame defaultFrame = new Frame();
                         frameView.ApplyFilter(delegate (Frame f) { return !(f.Equals(defaultFrame)); });
+                        frameSource.AllowNew = false;
+                        break;
+                    case 3:
+                        //Input has at least 1 button pressed
+                        frameView.ApplyFilter(delegate (Frame f) {
+                            return (
+                                f.A || f.B || f.X || f.Y ||
+                                f.Z || f.L || f.R || f.ST ||
+                                f.DD || f.DL || f.DR || f.DU
+                            );
+                        });
                         frameSource.AllowNew = false;
                         break;
                     default:
@@ -564,5 +583,25 @@ namespace pianokeys
             }
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult savePromptResult = DialogResult.No;
+            if (loadedFile != null)
+                savePromptResult = MessageBox.Show("Save your work before exiting?",
+                    "Exit", MessageBoxButtons.YesNoCancel);
+
+            switch (savePromptResult)
+            {
+                case DialogResult.Yes:
+                    saveFile(loadedFile.FilePath);
+                    Application.Exit();
+                    break;
+                case DialogResult.No:
+                    Application.Exit();
+                    break;
+                case DialogResult.Cancel:
+                    break;
+            }
+        }
     }
 }

@@ -144,6 +144,7 @@
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -551,7 +552,8 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.fileInfoToolStripMenuItem});
+            this.fileInfoToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -1235,7 +1237,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.selectedFrameBox);
-            this.splitContainer1.Panel1MinSize = 185;
+            this.splitContainer1.Panel1MinSize = 186;
             // 
             // splitContainer1.Panel2
             // 
@@ -1393,13 +1395,13 @@
             // 
             // filterComboBox
             // 
-            this.filterComboBox.AutoToolTip = true;
             this.filterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.filterComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.filterComboBox.Items.AddRange(new object[] {
             "None",
             "Notes Only",
-            "Inputs Only"});
+            "Non-empty Inputs",
+            "Button Inputs"});
             this.filterComboBox.Name = "filterComboBox";
             this.filterComboBox.Size = new System.Drawing.Size(121, 25);
             this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
@@ -1470,6 +1472,13 @@
             // frameBindingSource
             // 
             this.frameBindingSource.DataSource = typeof(pianokeys.Frame);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1640,6 +1649,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 
