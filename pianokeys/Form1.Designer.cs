@@ -233,7 +233,9 @@
             this.frameDataGridView.ShowRowErrors = false;
             this.frameDataGridView.Size = new System.Drawing.Size(780, 236);
             this.frameDataGridView.TabIndex = 1;
+            this.frameDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.frameDataGridView_CellBeginEdit);
             this.frameDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.frameDataGridView_CellContentClick);
+            this.frameDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.frameDataGridView_CellEndEdit);
             this.frameDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.frameDataGridView_RowPostPaint);
             // 
             // ST

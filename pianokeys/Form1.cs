@@ -29,11 +29,11 @@ using Equin.ApplicationFramework;
     Move heavy tasks to worker thread if necessary
 
     KNOWN BUGS:
-    Button clicks work with undo, text fields don't
+    
     Top bar throws exceptions when the list has one frame and it hasn't been made "official" by the grid viewer yet.
         (This is only possible to find if the user deletes their entire frame list. Is it worth worrying about?)
     
-    Edit events are incorrect for text fields and the frame edit group
+    Edit events are incorrect for right click functions and the frame edit group
 
 
     NOTES:
@@ -427,7 +427,6 @@ namespace pianokeys
                 new List<Frame>() { f },
                 new List<int>() { frameList.IndexOf(f) }
                 ));
-
             activeFrameBindingSource.EndEdit();
             frameSource.ResetCurrentItem();
         }
@@ -438,12 +437,46 @@ namespace pianokeys
 
         private void frameDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Frame f = getActiveFrame();
-            commitToUndoStack(new ActionStackItem(ActionType.Edit,
-                new List<Frame>() { f },
-                new List<int>() { frameList.IndexOf(f) }
-                ));
-            frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            //TODO Don't call if nothing changes from committing
+            var initialFrame = getActiveFrame();
+            if (initialFrame != null)
+            {
+                int index = frameList.IndexOf(initialFrame);
+                if (index != -1)
+                {
+                    ActiveFrame = initialFrame;
+                    initialFrame = new Frame(ActiveFrame);
+                    frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                    //Active Frame might have changed
+                    if (!ActiveFrame.Equals(initialFrame))
+                    {
+                        commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                           new List<Frame>() { initialFrame },
+                           new List<int>() { index }
+                           ));
+                    }
+                }
+            }
+        }
+
+        private void frameDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            Frame currentFrame = getActiveFrame();
+            if (currentFrame != null)
+                ActiveFrame = new Frame(currentFrame);
+        }
+
+        private void frameDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            Frame newActiveFrame = getActiveFrame();
+            if (newActiveFrame != null && !newActiveFrame.Equals(ActiveFrame))
+            {
+                commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                    new List<Frame>() { ActiveFrame },
+                    new List<int>() { frameList.IndexOf(newActiveFrame) }
+                    ));
+                frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
 
         private void gridContextMenu_Opening_1(object sender, CancelEventArgs e)
