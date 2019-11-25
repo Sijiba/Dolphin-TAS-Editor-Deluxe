@@ -32,8 +32,8 @@ using Equin.ApplicationFramework;
     Button clicks work with undo, text fields don't
     Top bar throws exceptions when the list has one frame and it hasn't been made "official" by the grid viewer yet.
         (This is only possible to find if the user deletes their entire frame list. Is it worth worrying about?)
-    Sometimes empty edit events get created
-    Confusion on editing text fields
+    
+    Edit events are incorrect for text fields and the frame edit group
 
 
     NOTES:
@@ -312,10 +312,12 @@ namespace pianokeys
                 stopListEvents();
                 usingUndoStack = true;
                 var action = undoStack.Pop();
-                var keys = action.ChangedFrames.Keys.ToArray();
+                var keys = action.ChangedFrames.Keys.ToList();
+                keys.Sort();
                 switch (action.Type)
                 {
                     case ActionType.Add:
+                        keys.Reverse();
                         foreach (int pos in keys)
                         {
                             if (frameList.Count > pos)
@@ -359,7 +361,8 @@ namespace pianokeys
                 stopListEvents();
                 usingUndoStack = true;
                 var action = redoStack.Pop();
-                var keys = action.ChangedFrames.Keys.ToArray();
+                var keys = action.ChangedFrames.Keys.ToList();
+                keys.Sort();
                 switch (action.Type)
                 {
                     case ActionType.Add:
@@ -369,6 +372,7 @@ namespace pianokeys
                         }
                         break;
                     case ActionType.Remove:
+                        keys.Reverse();
                         foreach (int pos in keys)
                         {
                             if (frameList.Count > pos)
