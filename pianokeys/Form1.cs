@@ -33,7 +33,6 @@ using Equin.ApplicationFramework;
     Top bar throws exceptions when the list has one frame and it hasn't been made "official" by the grid viewer yet.
         (This is only possible to find if the user deletes their entire frame list. Is it worth worrying about?)
     
-    Edit events are incorrect for right click functions and the frame edit group
 
 
     NOTES:
@@ -166,9 +165,7 @@ namespace pianokeys
             baseFrame = baseFrame ?? new Frame();
 
             for (int i = 0; i < count; i++)
-                frameList.Insert(pos, new Frame(baseFrame));
-
-            frameView.Refresh();
+                frameList.Insert(pos + i, new Frame(baseFrame));
         }
 
         #endregion
@@ -234,7 +231,6 @@ namespace pianokeys
             if (!usingUndoStack)
             {
                 redoStack.Clear();
-                frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 frameDataGridView.EndEdit();
                 frameSource.EndEdit();
                 frameView.EndNew(e.NewStartingIndex);
@@ -270,6 +266,7 @@ namespace pianokeys
                         return;
                 }
                 commitToUndoStack(new ActionStackItem((ActionType)(int)e.Action, newItems, newIndices));
+                frameView.Refresh();
             }
 
         }
@@ -349,8 +346,8 @@ namespace pianokeys
                         break;
                 }
                 redoStack.Push(action);
-                usingUndoStack = false;
                 continueListEvents();
+                usingUndoStack = false;
             }
         }
 
@@ -398,8 +395,8 @@ namespace pianokeys
                         break;
                 }
                 undoStack.Push(action);
-                usingUndoStack = false;
                 continueListEvents();
+                usingUndoStack = false;
             }
         }
 
@@ -409,25 +406,32 @@ namespace pianokeys
 
         private void SliderValueChanged(object sender, EventArgs e)
         {
-            Frame f = getActiveFrame();
-            commitToUndoStack(new ActionStackItem(ActionType.Edit,
-                new List<Frame>() { f },
-                new List<int>() { frameList.IndexOf(f) }
-                ));
-
+            if (!usingUndoStack)
+            {
+                Frame f = getActiveFrame();
+                commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                    new List<Frame>() { f },
+                    new List<int>() { frameList.IndexOf(f) }
+                    ));
+            }
             activeFrameBindingSource.EndEdit();
             activeFrameBindingSource.ResetCurrentItem();
+            //TODO if no valid current item, make one
             frameSource.ResetCurrentItem();
         }
 
         private void CheckboxValueChanged(object sender, MouseEventArgs e)
         {
-            Frame f = getActiveFrame();
-            commitToUndoStack(new ActionStackItem(ActionType.Edit,
-                new List<Frame>() { f },
-                new List<int>() { frameList.IndexOf(f) }
-                ));
+            if (!usingUndoStack)
+            {
+                Frame f = getActiveFrame();
+                commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                    new List<Frame>() { f },
+                    new List<int>() { frameList.IndexOf(f) }
+                    ));
+            }
             activeFrameBindingSource.EndEdit();
+            //TODO if no valid current item, make one
             frameSource.ResetCurrentItem();
         }
 
@@ -589,75 +593,6 @@ namespace pianokeys
             }
         }
 
-        private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var selection = frameDataGridView.SelectedCells;
-            if (getSelectedFrameIndices().Count > 0)
-            {
-                foreach (DataGridViewCell cell in selection)
-                {
-                    if (cell.ValueType == typeof(bool))
-                    {
-                        cell.Value = false;
-                    }
-                    else if (cell.ValueType == typeof(byte))
-                    {
-                        var columnName = cell.OwningColumn.Name;
-                        if (columnName[1] == 'P')
-                            cell.Value = 0;
-                        else
-                            cell.Value = 128;
-                    }
-                    else if (cell.ValueType == typeof(string))
-                    {
-                        cell.Value = "";
-                    }
-                }
-            }
-            frameView.Refresh();
-        }
-
-        private void insertBeforeMenuItem_Click(object sender, EventArgs e)
-        {
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
-                insertNewFrame(selectedRowList.Min(), 1);
-        }
-
-        private void insertAfterMenuItem_Click(object sender, EventArgs e)
-        {
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
-                insertNewFrame(selectedRowList.Max() + 1, 1);
-        }
-
-        private void insertMultipleMenuItem_Click(object sender, EventArgs e)
-        {
-            // prompt for a number of rows and whether to add them before or
-            // after the selected row(s)
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
-            {
-                var insDialog = new MultiFrameInsertDialog();
-                if (insDialog.ShowDialog() == DialogResult.OK)
-                {
-                    if (insDialog.InsertFramesAfter)
-                        insertNewFrame(selectedRowList.Max() + 1, insDialog.FrameCount);
-                    else
-                        insertNewFrame(selectedRowList.Min(), insDialog.FrameCount);
-                }
-            }
-        }
-
-        private void deleteMenuItem_Click(object sender, EventArgs e)
-        {
-            var itemsToDelete = getGridSelectedFrames();
-            foreach (Frame f in itemsToDelete)
-            {
-                frameSource.Remove(f);
-            }
-        }
-
         private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //TODO Get old item state from change stack, make changes
@@ -768,6 +703,79 @@ namespace pianokeys
                 case DialogResult.Cancel:
                     e.Cancel = true;
                     break;
+            }
+        }
+
+        #endregion
+
+        #region List Edit Menu Events
+
+        private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selection = frameDataGridView.SelectedCells;
+            if (getSelectedFrameIndices().Count > 0)
+            {
+                foreach (DataGridViewCell cell in selection)
+                {
+                    if (cell.ValueType == typeof(bool))
+                    {
+                        cell.Value = false;
+                    }
+                    else if (cell.ValueType == typeof(byte))
+                    {
+                        var columnName = cell.OwningColumn.Name;
+                        if (columnName[1] == 'P')
+                            cell.Value = 0;
+                        else
+                            cell.Value = 128;
+                    }
+                    else if (cell.ValueType == typeof(string))
+                    {
+                        cell.Value = "";
+                    }
+                }
+            }
+            frameView.Refresh();
+        }
+
+        private void insertBeforeMenuItem_Click(object sender, EventArgs e)
+        {
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+                insertNewFrame(selectedRowList.Min(), 1);
+        }
+
+        private void insertAfterMenuItem_Click(object sender, EventArgs e)
+        {
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+                insertNewFrame(selectedRowList.Max() + 1, 1);
+        }
+
+        private void insertMultipleMenuItem_Click(object sender, EventArgs e)
+        {
+            // prompt for a number of rows and whether to add them before or
+            // after the selected row(s)
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+            {
+                var insDialog = new MultiFrameInsertDialog();
+                if (insDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (insDialog.InsertFramesAfter)
+                        insertNewFrame(selectedRowList.Max() + 1, insDialog.FrameCount);
+                    else
+                        insertNewFrame(selectedRowList.Min(), insDialog.FrameCount);
+                }
+            }
+        }
+
+        private void deleteMenuItem_Click(object sender, EventArgs e)
+        {
+            var itemsToDelete = getGridSelectedFrames();
+            foreach (Frame f in itemsToDelete)
+            {
+                frameSource.Remove(f);
             }
         }
 
@@ -900,6 +908,6 @@ namespace pianokeys
         }
 
         #endregion
-
+        
     }
 }

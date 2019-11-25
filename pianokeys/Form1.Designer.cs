@@ -85,7 +85,6 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -144,6 +143,7 @@
             this.statusLabel = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
@@ -153,7 +153,6 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -177,6 +176,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).BeginInit();
             this.frameNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -727,10 +727,6 @@
             0,
             0});
             this.numericUpDown5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // activeFrameBindingSource
-            // 
-            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
             // 
             // numericUpDown6
             // 
@@ -1478,6 +1474,10 @@
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
+            // activeFrameBindingSource
+            // 
+            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
+            // 
             // frameBindingSource
             // 
             this.frameBindingSource.DataSource = typeof(pianokeys.Frame);
@@ -1506,7 +1506,6 @@
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
@@ -1538,6 +1537,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).EndInit();
             this.frameNavigator.ResumeLayout(false);
             this.frameNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

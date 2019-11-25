@@ -39,9 +39,12 @@ namespace pianokeys
         
         public void extendAction(ActionStackItem newItem)
         {
-            foreach (var fc in newItem.ChangedFrames)
+            if (this.Type != ActionType.Edit)
             {
-                ChangedFrames[fc.Key] = fc.Value;
+                foreach (var fc in newItem.ChangedFrames)
+                {
+                    ChangedFrames[fc.Key] = fc.Value;
+                }
             }
         }
     }
