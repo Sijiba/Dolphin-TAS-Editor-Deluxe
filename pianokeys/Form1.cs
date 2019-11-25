@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -27,7 +29,12 @@ using Equin.ApplicationFramework;
     Move heavy tasks to worker thread if necessary
 
     KNOWN BUGS:
-    Crash with filter and loading new files? Maybe fixed
+    Button clicks work with undo, text fields don't
+    Top bar throws exceptions when the list has one frame and it hasn't been made "official" by the grid viewer yet.
+        (This is only possible to find if the user deletes their entire frame list. Is it worth worrying about?)
+    Sometimes empty edit events get created
+    Confusion on editing text fields
+
 
     NOTES:
     clicking new row when it's partly below the screen adds 10 rows instead. Is this fine or is there a way to change this?
@@ -39,10 +46,15 @@ namespace pianokeys
     public partial class Form1 : Form
     {
         private Frame ActiveFrame;
-        private List<Frame> frameList; //List containing data associated with the loaded file
+        private ObservableCollection<Frame> frameList; //List containing data associated with the loaded file
         private BindingListView<Frame> frameView; //Provides filters for the frameList
         private BindingSource frameSource; //Shows frameView to window's controls
         private DTM loadedFile;
+
+        private Stack<ActionStackItem> undoStack;
+        private Stack<ActionStackItem> redoStack;
+        private bool usingUndoStack;
+
 
         private List<Frame> clipboard;
 
@@ -53,7 +65,7 @@ namespace pianokeys
             ActiveFrame = new Frame();
             var t = new Frame();
             activeFrameBindingSource.Add(t);
-            frameList = new List<Frame>();
+            frameList = new ObservableCollection<Frame>();
             frameView = new BindingListView<Frame>(frameList);
             frameSource = new BindingSource(frameView, null);
             loadedFile = null;
@@ -62,8 +74,13 @@ namespace pianokeys
 
             frameDataGridView.DataSource = frameSource;
             frameNavigator.BindingSource = frameSource;
-        }
 
+            frameList.CollectionChanged += FrameList_CollectionChanged;
+
+            usingUndoStack = false;
+            undoStack = new Stack<ActionStackItem>();
+            redoStack = new Stack<ActionStackItem>();
+        }
 
         #region List Accessing
 
@@ -139,6 +156,7 @@ namespace pianokeys
             //otherwise invalid
             return -1;
         }
+
         #endregion
 
         #region List Manipulation
@@ -204,19 +222,208 @@ namespace pianokeys
                     "Failed to save", MessageBoxButtons.OK);
             }
         }
+
         #endregion
 
+        #region UndoRedo
+
+        private void FrameList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //Check the top stack item. If it's the same type of change & occurred within the last second,
+            // combine the changes; otherwise make copies of all the old
+            if (!usingUndoStack)
+            {
+                redoStack.Clear();
+                frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                frameDataGridView.EndEdit();
+                frameSource.EndEdit();
+                frameView.EndNew(e.NewStartingIndex);
+
+                var changeTime = DateTime.UtcNow;
+                List<Frame> newItems = new List<Frame>();
+                List<int> newIndices = new List<int>();
+
+                //TODO Specify what to add to the undo stack
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                        {
+                            newItems.Add((Frame)e.NewItems[i]);
+                            newIndices.Add(e.NewStartingIndex + i);
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        for (int i = 0; i < e.OldItems.Count; i++)
+                        {
+                            newItems.Add((Frame)e.OldItems[i]);
+                            newIndices.Add(e.OldStartingIndex + i);
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+                        throw new NotImplementedException("Did't do replace");
+                    case NotifyCollectionChangedAction.Move:
+                        throw new NotImplementedException("Did't do move");
+                    case NotifyCollectionChangedAction.Reset:
+                        undoStack.Clear();
+                        redoStack.Clear();
+                        return;
+                }
+                commitToUndoStack(new ActionStackItem((ActionType)(int)e.Action, newItems, newIndices));
+            }
+
+        }
+
+        private void commitToUndoStack(ActionStackItem newItem)
+        {
+            if (usingUndoStack)
+                return;
+
+            const double stackMergeTimeLimitSeconds = 1;
+            ActionStackItem undoStackTop = (undoStack.Count > 0 ? undoStack.Peek() : null);
+            bool useNew = true;
+
+            if (undoStackTop != null &&
+                (newItem.actionTime <= undoStackTop.actionTime.AddSeconds(stackMergeTimeLimitSeconds)))
+            {
+                if (undoStackTop.Type == newItem.Type)
+                {
+                    undoStackTop.extendAction(newItem);
+                    useNew = false;
+                }
+                else if ((undoStackTop.Type == ActionType.Add) &&
+                    (newItem.Type == ActionType.Edit))
+                {
+                    foreach (var pair in newItem.ChangedFrames)
+                    {
+                        undoStackTop.ChangedFrames[pair.Key] = pair.Value;
+                    }
+                    useNew = false;
+                }
+            }
+            if (useNew)
+                undoStack.Push(newItem);
+        }
+
+        private void Undo()
+        {
+            if (undoStack.Count > 0)
+            {
+                stopListEvents();
+                usingUndoStack = true;
+                var action = undoStack.Pop();
+                var keys = action.ChangedFrames.Keys.ToArray();
+                switch (action.Type)
+                {
+                    case ActionType.Add:
+                        foreach (int pos in keys)
+                        {
+                            if (frameList.Count > pos)
+                            {
+                                action.ChangedFrames[pos] = frameList[pos];
+                                frameList.RemoveAt(pos);
+                            }
+                        }
+                        break;
+                    case ActionType.Remove:
+                        foreach (int pos in keys)
+                        {
+                            frameList.Insert(pos, new Frame(action.ChangedFrames[pos]));
+                        }
+                        break;
+                    case ActionType.Replace:
+                        throw new NotImplementedException("No Undo Replace");
+                    case ActionType.Move:
+                        throw new NotImplementedException("No Undo Move");
+                    case ActionType.Reset:
+                        throw new NotImplementedException("No Undo Reset");
+                    case ActionType.Edit:
+                        foreach (var pos in keys)
+                        {
+                            var currentFrameCopy = new Frame(frameList[pos]);
+                            frameList[pos].copyDataFromFrame(action.ChangedFrames[pos]);
+                            action.ChangedFrames[pos] = currentFrameCopy;
+                        }
+                        break;
+                }
+                redoStack.Push(action);
+                usingUndoStack = false;
+                continueListEvents();
+            }
+        }
+
+        private void Redo()
+        {
+            if (redoStack.Count > 0)
+            {
+                stopListEvents();
+                usingUndoStack = true;
+                var action = redoStack.Pop();
+                var keys = action.ChangedFrames.Keys.ToArray();
+                switch (action.Type)
+                {
+                    case ActionType.Add:
+                        foreach (int pos in keys)
+                        {
+                            frameList.Insert(pos, new Frame(action.ChangedFrames[pos]));
+                        }
+                        break;
+                    case ActionType.Remove:
+                        foreach (int pos in keys)
+                        {
+                            if (frameList.Count > pos)
+                            {
+                                action.ChangedFrames[pos] = frameList[pos];
+                                frameList.RemoveAt(pos);
+                            }
+                        }
+                        break;
+                    case ActionType.Replace:
+                        throw new NotImplementedException("No Redo Replace");
+                    case ActionType.Move:
+                        throw new NotImplementedException("No Redo Move");
+                    case ActionType.Reset:
+                        throw new NotImplementedException("No Redo Reset");
+                    case ActionType.Edit:
+                        foreach (var pos in keys)
+                        {
+                            var currentFrameCopy = new Frame(frameList[pos]);
+                            frameList[pos].copyDataFromFrame(action.ChangedFrames[pos]);
+                            action.ChangedFrames[pos] = currentFrameCopy;
+                        }
+                        break;
+                }
+                undoStack.Push(action);
+                usingUndoStack = false;
+                continueListEvents();
+            }
+        }
+
+        #endregion
+        
         #region Active Frame Viewer events
 
         private void SliderValueChanged(object sender, EventArgs e)
         {
+            Frame f = getActiveFrame();
+            commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                new List<Frame>() { f },
+                new List<int>() { frameList.IndexOf(f) }
+                ));
+
             activeFrameBindingSource.EndEdit();
             activeFrameBindingSource.ResetCurrentItem();
             frameSource.ResetCurrentItem();
         }
 
-        private void SliderValueChanged(object sender, MouseEventArgs e)
+        private void CheckboxValueChanged(object sender, MouseEventArgs e)
         {
+            Frame f = getActiveFrame();
+            commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                new List<Frame>() { f },
+                new List<int>() { frameList.IndexOf(f) }
+                ));
+
             activeFrameBindingSource.EndEdit();
             frameSource.ResetCurrentItem();
         }
@@ -227,6 +434,11 @@ namespace pianokeys
 
         private void frameDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            Frame f = getActiveFrame();
+            commitToUndoStack(new ActionStackItem(ActionType.Edit,
+                new List<Frame>() { f },
+                new List<int>() { frameList.IndexOf(f) }
+                ));
             frameDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
@@ -274,6 +486,7 @@ namespace pianokeys
                 {
                     loadedFile = inputFile;
                     stopListEvents();
+                    usingUndoStack = true;
                     filterComboBox.SelectedIndex = 0;
                     frameList.Clear();
                     foreach (DTMEditor.FileHandling.ControllerData.DTMControllerDatum datum in inputFile.ControllerData)
@@ -302,6 +515,7 @@ namespace pianokeys
                     statusLabel.Text = "Loaded " + Path.GetFileName(path) + ".";
 
                     frameDataGridView.Enabled = true;
+                    usingUndoStack = false;
                 }
             }
 
@@ -411,13 +625,14 @@ namespace pianokeys
         {
             //TODO Get old item state from change stack, make changes
             //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
+            Undo();
         }
 
         private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //TODO get item state from redo stack, make changes
             //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
-
+            Redo();
         }
 
         private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -467,6 +682,7 @@ namespace pianokeys
                 continueListEvents();
             }
         }
+
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             bool shouldEnable = (loadedFile != null);
@@ -497,6 +713,27 @@ namespace pianokeys
                     break;
             }
         }
+        
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult savePromptResult = DialogResult.No;
+            if (loadedFile != null)
+                savePromptResult = MessageBox.Show("Save your work before exiting?",
+                    "Exit", MessageBoxButtons.YesNoCancel);
+
+            switch (savePromptResult)
+            {
+                case DialogResult.Yes:
+                    saveFile(loadedFile.FilePath);
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
         #endregion
 
         #region View Functions
@@ -624,8 +861,8 @@ namespace pianokeys
                 e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
             }
         }
+
         #endregion
 
-        
     }
 }

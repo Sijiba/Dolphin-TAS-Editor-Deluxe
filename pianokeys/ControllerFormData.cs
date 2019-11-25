@@ -90,13 +90,18 @@ namespace pianokeys
 
         public Frame(Frame frameToCopy)
         {
-            this.A =  frameToCopy.A;
-            this.B =  frameToCopy.B;
-            this.L =  frameToCopy.L;
-            this.R =  frameToCopy.R;
-            this.X =  frameToCopy.X;
-            this.Y =  frameToCopy.Y;
-            this.Z =  frameToCopy.Z;
+            copyDataFromFrame(frameToCopy);
+        }
+
+        public void copyDataFromFrame(Frame frameToCopy)
+        {
+            this.A = frameToCopy.A;
+            this.B = frameToCopy.B;
+            this.L = frameToCopy.L;
+            this.R = frameToCopy.R;
+            this.X = frameToCopy.X;
+            this.Y = frameToCopy.Y;
+            this.Z = frameToCopy.Z;
             this.DU = frameToCopy.DU;
             this.DD = frameToCopy.DD;
             this.DL = frameToCopy.DL;

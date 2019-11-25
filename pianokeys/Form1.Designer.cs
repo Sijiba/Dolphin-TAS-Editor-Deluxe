@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.frameDataGridView = new System.Windows.Forms.DataGridView();
             this.ST = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -76,6 +76,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedFrameBox = new System.Windows.Forms.GroupBox();
@@ -83,6 +84,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.trackBar5 = new System.Windows.Forms.TrackBar();
@@ -140,10 +144,6 @@
             this.statusLabel = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
             this.gridContextMenu.SuspendLayout();
@@ -152,6 +152,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
@@ -174,9 +177,6 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).BeginInit();
             this.frameNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,25 +207,25 @@
             this.CY,
             this.NoteColumn});
             this.frameDataGridView.ContextMenuStrip = this.gridContextMenu;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.frameDataGridView.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.frameDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.frameDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.frameDataGridView.Location = new System.Drawing.Point(3, 3);
             this.frameDataGridView.Name = "frameDataGridView";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.frameDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.frameDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.frameDataGridView.RowHeadersWidth = 60;
             this.frameDataGridView.RowTemplate.Height = 30;
             this.frameDataGridView.ShowCellErrors = false;
@@ -248,11 +248,11 @@
             // A
             // 
             this.A.DataPropertyName = "A";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle8.NullValue = false;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.A.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.A.DefaultCellStyle = dataGridViewCellStyle1;
             this.A.HeaderText = "A";
             this.A.Name = "A";
             this.A.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -261,11 +261,11 @@
             // B
             // 
             this.B.DataPropertyName = "B";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle9.NullValue = false;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.B.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.NullValue = false;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.B.DefaultCellStyle = dataGridViewCellStyle2;
             this.B.HeaderText = "B";
             this.B.Name = "B";
             this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -326,11 +326,11 @@
             // Z
             // 
             this.Z.DataPropertyName = "Z";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.NullValue = false;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Z.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.NullValue = false;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Z.DefaultCellStyle = dataGridViewCellStyle3;
             this.Z.HeaderText = "Z";
             this.Z.Name = "Z";
             this.Z.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -396,9 +396,9 @@
             // CX
             // 
             this.CX.DataPropertyName = "CX";
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CX.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CX.DefaultCellStyle = dataGridViewCellStyle4;
             this.CX.HeaderText = "CX";
             this.CX.MaxInputLength = 3;
             this.CX.Name = "CX";
@@ -409,9 +409,9 @@
             // CY
             // 
             this.CY.DataPropertyName = "CY";
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Olive;
-            this.CY.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Olive;
+            this.CY.DefaultCellStyle = dataGridViewCellStyle5;
             this.CY.HeaderText = "CY";
             this.CY.MaxInputLength = 3;
             this.CY.Name = "CY";
@@ -590,6 +590,13 @@
             this.fileInfoToolStripMenuItem.Text = "File Properties";
             this.fileInfoToolStripMenuItem.Click += new System.EventHandler(this.fileInfoToolStripMenuItem_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
@@ -697,6 +704,53 @@
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel13.Size = new System.Drawing.Size(152, 93);
             this.tableLayoutPanel13.TabIndex = 5;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
+            this.numericUpDown5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDown5.Location = new System.Drawing.Point(45, 3);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(104, 20);
+            this.numericUpDown5.TabIndex = 3;
+            this.numericUpDown5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown5.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // activeFrameBindingSource
+            // 
+            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.AutoSize = true;
+            this.numericUpDown6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
+            this.numericUpDown6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDown6.Location = new System.Drawing.Point(45, 29);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(104, 20);
+            this.numericUpDown6.TabIndex = 4;
+            this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown6.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.numericUpDown6.ValueChanged += new System.EventHandler(this.SliderValueChanged);
             // 
             // label8
             // 
@@ -1075,7 +1129,7 @@
             this.checkBox12.TabIndex = 11;
             this.checkBox12.Text = "D Down";
             this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox11
             // 
@@ -1088,7 +1142,7 @@
             this.checkBox11.TabIndex = 10;
             this.checkBox11.Text = "D Left";
             this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox10
             // 
@@ -1101,7 +1155,7 @@
             this.checkBox10.TabIndex = 9;
             this.checkBox10.Text = "D Right";
             this.checkBox10.UseVisualStyleBackColor = true;
-            this.checkBox10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox9
             // 
@@ -1114,7 +1168,7 @@
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Text = "D Up";
             this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox8
             // 
@@ -1127,7 +1181,7 @@
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Text = "Y";
             this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox7
             // 
@@ -1140,7 +1194,7 @@
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Text = "X";
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox6
             // 
@@ -1153,7 +1207,7 @@
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Text = "B";
             this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox5
             // 
@@ -1166,7 +1220,7 @@
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "A";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox4
             // 
@@ -1179,7 +1233,7 @@
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "R";
             this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox3
             // 
@@ -1192,7 +1246,7 @@
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "L";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox2
             // 
@@ -1205,7 +1259,7 @@
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Z";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // checkBox1
             // 
@@ -1218,7 +1272,7 @@
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Start";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderValueChanged);
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CheckboxValueChanged);
             // 
             // openFileDialog1
             // 
@@ -1422,60 +1476,6 @@
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.AutoSize = true;
-            this.numericUpDown6.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CY", true));
-            this.numericUpDown6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDown6.Location = new System.Drawing.Point(45, 29);
-            this.numericUpDown6.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(104, 20);
-            this.numericUpDown6.TabIndex = 4;
-            this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown6.Value = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.numericUpDown6.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "CX", true));
-            this.numericUpDown5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDown5.Location = new System.Drawing.Point(45, 3);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(104, 20);
-            this.numericUpDown5.TabIndex = 3;
-            this.numericUpDown5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.numericUpDown5.ValueChanged += new System.EventHandler(this.SliderValueChanged);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // activeFrameBindingSource
-            // 
-            this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
-            // 
             // frameBindingSource
             // 
             this.frameBindingSource.DataSource = typeof(pianokeys.Frame);
@@ -1490,6 +1490,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Dolphin TAS Editor Deluxe";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).EndInit();
             this.gridContextMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -1502,6 +1503,9 @@
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -1532,9 +1536,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).EndInit();
             this.frameNavigator.ResumeLayout(false);
             this.frameNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
