@@ -23,15 +23,24 @@ namespace pianokeys.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("128")]
         public int LeftStickX {
             get {
                 return ((int)(this["LeftStickX"]));
             }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DolphinPath {
+            get {
+                return ((string)(this["DolphinPath"]));
+            }
             set {
-                this["LeftStickX"] = value;
+                this["DolphinPath"] = value;
             }
         }
     }

@@ -121,9 +121,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.Size = new System.Drawing.Size(86, 26);
             this.label1.TabIndex = 2;
             this.label1.Text = "Number of Rows";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,8 +19,6 @@ using Equin.ApplicationFramework;
     Navigate to next frame with specific button values/containing notes
     Copy/Paste working between instances of pianokeys
     Disable controls while no file is loaded (or if no game is specified?)
-    Call exit stuff on pressing window X
-    Undo/Redo
     
     CLEANUP:
     Deleting multiple frames takes a long time
@@ -33,8 +32,6 @@ using Equin.ApplicationFramework;
     Top bar throws exceptions when the list has one frame and it hasn't been made "official" by the grid viewer yet.
         (This is only possible to find if the user deletes their entire frame list. Is it worth worrying about?)
     
-
-
     NOTES:
     clicking new row when it's partly below the screen adds 10 rows instead. Is this fine or is there a way to change this?
     If we locate dolphin.exe, we can run "dolphin -m filename" to view the current movie
@@ -507,7 +504,148 @@ namespace pianokeys
 
         #endregion
 
-        #region Menu Button events
+        #region Control + Z/Y/C/V Events
+
+        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //TODO Get old item state from change stack, make changes
+            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
+            Undo();
+        }
+
+        private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //TODO get item state from redo stack, make changes
+            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
+            Redo();
+        }
+
+        private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // copy selected rows to clipboard
+            HashSet<int> selectedRows = getSelectedFrameIndices();
+
+            if (selectedRows.Count > 0)
+            {
+                clipboard.Clear();
+                foreach (int rowIndex in selectedRows)
+                {
+                    clipboard.Add(new Frame(frameList[rowIndex]));
+                }
+            }
+
+            Clipboard.SetDataObject(clipboard);
+        }
+
+        private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // paste rows before selection
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0 && clipboard.Count > 0)
+            {
+                stopListEvents();
+                //frameView.RaiseListChangedEvents = false;
+                int insertPosition = selectedRowList.Min();
+                for (int i = clipboard.Count - 1; i >= 0; i--)
+                {
+                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
+                }
+                continueListEvents();
+            }
+        }
+
+        private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // paste rows after selection, or at the end of the file
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0 && clipboard.Count > 0)
+            {
+                stopListEvents();
+                int insertPosition = selectedRowList.Max() + 1;
+                for (int i = clipboard.Count - 1; i >= 0; i--)
+                {
+                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
+                }
+                continueListEvents();
+            }
+        }
+
+        #endregion
+        
+        #region List Edit Menu Events
+
+        private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selection = frameDataGridView.SelectedCells;
+            if (getSelectedFrameIndices().Count > 0)
+            {
+                foreach (DataGridViewCell cell in selection)
+                {
+                    if (cell.ValueType == typeof(bool))
+                    {
+                        cell.Value = false;
+                    }
+                    else if (cell.ValueType == typeof(byte))
+                    {
+                        var columnName = cell.OwningColumn.Name;
+                        if (columnName[1] == 'P')
+                            cell.Value = 0;
+                        else
+                            cell.Value = 128;
+                    }
+                    else if (cell.ValueType == typeof(string))
+                    {
+                        cell.Value = "";
+                    }
+                }
+            }
+            frameView.Refresh();
+        }
+
+        private void insertBeforeMenuItem_Click(object sender, EventArgs e)
+        {
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+                insertNewFrame(selectedRowList.Min(), 1);
+        }
+
+        private void insertAfterMenuItem_Click(object sender, EventArgs e)
+        {
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+                insertNewFrame(selectedRowList.Max() + 1, 1);
+        }
+
+        private void insertMultipleMenuItem_Click(object sender, EventArgs e)
+        {
+            // prompt for a number of rows and whether to add them before or
+            // after the selected row(s)
+            HashSet<int> selectedRowList = getSelectedFrameIndices();
+            if (selectedRowList.Count > 0)
+            {
+                var insDialog = new MultiFrameInsertDialog();
+                if (insDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (insDialog.InsertFramesAfter)
+                        insertNewFrame(selectedRowList.Max() + 1, insDialog.FrameCount);
+                    else
+                        insertNewFrame(selectedRowList.Min(), insDialog.FrameCount);
+                }
+            }
+        }
+
+        private void deleteMenuItem_Click(object sender, EventArgs e)
+        {
+            var itemsToDelete = getGridSelectedFrames();
+            foreach (Frame f in itemsToDelete)
+            {
+                frameSource.Remove(f);
+            }
+        }
+
+        #endregion
+
+        #region File IO Events
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -593,67 +731,9 @@ namespace pianokeys
             }
         }
 
-        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //TODO Get old item state from change stack, make changes
-            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
-            Undo();
-        }
+        #endregion
 
-        private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //TODO get item state from redo stack, make changes
-            //note: maybe, maybe not, depending on undo-ability of gridview's built-in adds/deletes
-            Redo();
-        }
-
-        private void copyFramesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // copy selected rows to clipboard
-            HashSet<int> selectedRows = getSelectedFrameIndices();
-
-            if (selectedRows.Count > 0)
-            {
-                clipboard.Clear();
-                foreach (int rowIndex in selectedRows)
-                {
-                    clipboard.Add(new Frame(frameList[rowIndex]));
-                }
-            }
-        }
-
-        private void pasteBeforeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // paste rows before selection
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0 && clipboard.Count > 0)
-            {
-                stopListEvents();
-                //frameView.RaiseListChangedEvents = false;
-                int insertPosition = selectedRowList.Min();
-                for (int i = clipboard.Count - 1; i >= 0; i--)
-                {
-                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
-                }
-                continueListEvents();
-            }
-        }
-
-        private void pasteAfterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // paste rows after selection, or at the end of the file
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0 && clipboard.Count > 0)
-            {
-                stopListEvents();
-                int insertPosition = selectedRowList.Max() + 1;
-                for (int i = clipboard.Count - 1; i >= 0; i--)
-                {
-                    frameList.Insert(insertPosition, new Frame(clipboard[i]));
-                }
-                continueListEvents();
-            }
-        }
+        #region Menuing Events
 
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
@@ -664,7 +744,7 @@ namespace pianokeys
             fileInfoToolStripMenuItem.Enabled = shouldEnable;
 
         }
-        
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult savePromptResult = DialogResult.No;
@@ -685,7 +765,7 @@ namespace pianokeys
                     break;
             }
         }
-        
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult savePromptResult = DialogResult.No;
@@ -706,77 +786,47 @@ namespace pianokeys
             }
         }
 
-        #endregion
 
-        #region List Edit Menu Events
-
-        private void clearSelectedValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void viewInDolphinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var selection = frameDataGridView.SelectedCells;
-            if (getSelectedFrameIndices().Count > 0)
+            DialogResult savePromptResult = DialogResult.No;
+            if (loadedFile != null)
+                savePromptResult = MessageBox.Show("You must save this file before launching the emulator. Is this OK?",
+                    "Info", MessageBoxButtons.OKCancel);
+
+            switch (savePromptResult)
             {
-                foreach (DataGridViewCell cell in selection)
+                case DialogResult.OK:
+                    saveFile(loadedFile.FilePath);
+                    launchEmulator();
+                    break;
+                case DialogResult.Cancel:
+                    break;
+            }
+        }
+
+        private void launchEmulator()
+        {
+            if (Properties.Settings.Default.DolphinPath.Length == 0)
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Dolphin Executable|Dolphin.exe";
+                dialog.Multiselect = false;
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (cell.ValueType == typeof(bool))
-                    {
-                        cell.Value = false;
-                    }
-                    else if (cell.ValueType == typeof(byte))
-                    {
-                        var columnName = cell.OwningColumn.Name;
-                        if (columnName[1] == 'P')
-                            cell.Value = 0;
-                        else
-                            cell.Value = 128;
-                    }
-                    else if (cell.ValueType == typeof(string))
-                    {
-                        cell.Value = "";
-                    }
+                    Properties.Settings.Default.DolphinPath = dialog.FileName;
+                    Properties.Settings.Default.Save();
                 }
             }
-            frameView.Refresh();
-        }
 
-        private void insertBeforeMenuItem_Click(object sender, EventArgs e)
-        {
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
-                insertNewFrame(selectedRowList.Min(), 1);
-        }
-
-        private void insertAfterMenuItem_Click(object sender, EventArgs e)
-        {
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
-                insertNewFrame(selectedRowList.Max() + 1, 1);
-        }
-
-        private void insertMultipleMenuItem_Click(object sender, EventArgs e)
-        {
-            // prompt for a number of rows and whether to add them before or
-            // after the selected row(s)
-            HashSet<int> selectedRowList = getSelectedFrameIndices();
-            if (selectedRowList.Count > 0)
+            if (loadedFile != null)
             {
-                var insDialog = new MultiFrameInsertDialog();
-                if (insDialog.ShowDialog() == DialogResult.OK)
+                if (Properties.Settings.Default.DolphinPath.Length != 0)
                 {
-                    if (insDialog.InsertFramesAfter)
-                        insertNewFrame(selectedRowList.Max() + 1, insDialog.FrameCount);
-                    else
-                        insertNewFrame(selectedRowList.Min(), insDialog.FrameCount);
+                    Process.Start(Properties.Settings.Default.DolphinPath, "-b -m \"" + loadedFile.FilePath + "\"");
                 }
             }
-        }
-
-        private void deleteMenuItem_Click(object sender, EventArgs e)
-        {
-            var itemsToDelete = getGridSelectedFrames();
-            foreach (Frame f in itemsToDelete)
-            {
-                frameSource.Remove(f);
-            }
+            
         }
 
         #endregion
@@ -793,7 +843,7 @@ namespace pianokeys
                 int index = frameList.IndexOf(currentFrame);
                 if (index != -1)
                 {
-                    selectedFrameBox.Text = "Frame " + (index + 1).ToString();
+                    selectedFrameBox.Text = "Input " + (index + 1).ToString();
                     activeFrameBindingSource.Add(currentFrame);
                     activeFrameBindingSource.RemoveAt(0);
                     activeFrameBindingSource.EndEdit();
@@ -908,6 +958,6 @@ namespace pianokeys
         }
 
         #endregion
-        
+
     }
 }

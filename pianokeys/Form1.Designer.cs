@@ -100,7 +100,6 @@
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.trackBar4 = new System.Windows.Forms.TrackBar();
@@ -143,6 +142,8 @@
             this.statusLabel = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.viewInDolphinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activeFrameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.frameDataGridView)).BeginInit();
@@ -160,7 +161,6 @@
             this.tableLayoutPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
@@ -176,6 +176,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).BeginInit();
             this.frameNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -444,15 +445,14 @@
             this.deleteMenuItem,
             this.clearSelectedValuesToolStripMenuItem});
             this.gridContextMenu.Name = "gridContextMenu";
-            this.gridContextMenu.OwnerItem = this.editToolStripMenuItem;
-            this.gridContextMenu.Size = new System.Drawing.Size(228, 230);
+            this.gridContextMenu.Size = new System.Drawing.Size(223, 230);
             this.gridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.gridContextMenu_Opening_1);
             // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(227, 22);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(222, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
@@ -460,7 +460,7 @@
             // 
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(227, 22);
+            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(222, 22);
             this.redoToolStripMenuItem1.Text = "Redo";
             this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
@@ -468,15 +468,15 @@
             // 
             this.copyFramesToolStripMenuItem.Name = "copyFramesToolStripMenuItem";
             this.copyFramesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.copyFramesToolStripMenuItem.Text = "Copy Frame(s)";
+            this.copyFramesToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.copyFramesToolStripMenuItem.Text = "Copy Input(s)";
             this.copyFramesToolStripMenuItem.Click += new System.EventHandler(this.copyFramesToolStripMenuItem_Click);
             // 
             // pasteAfterToolStripMenuItem
             // 
             this.pasteAfterToolStripMenuItem.Name = "pasteAfterToolStripMenuItem";
             this.pasteAfterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.pasteAfterToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.pasteAfterToolStripMenuItem.Text = "Paste After";
             this.pasteAfterToolStripMenuItem.Click += new System.EventHandler(this.pasteAfterToolStripMenuItem_Click);
             // 
@@ -485,48 +485,48 @@
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.pasteToolStripMenuItem.Text = "Paste Before";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteBeforeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(219, 6);
             // 
             // insertAfterMenuItem
             // 
             this.insertAfterMenuItem.Name = "insertAfterMenuItem";
-            this.insertAfterMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.insertAfterMenuItem.Text = "Insert Frame After";
+            this.insertAfterMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.insertAfterMenuItem.Text = "Insert Input After";
             this.insertAfterMenuItem.Click += new System.EventHandler(this.insertAfterMenuItem_Click);
             // 
             // insertBeforeMenuItem
             // 
             this.insertBeforeMenuItem.Name = "insertBeforeMenuItem";
-            this.insertBeforeMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.insertBeforeMenuItem.Text = "Insert Frame Before";
+            this.insertBeforeMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.insertBeforeMenuItem.Text = "Insert Input Before";
             this.insertBeforeMenuItem.Click += new System.EventHandler(this.insertBeforeMenuItem_Click);
             // 
             // insertMultipleMenuItem
             // 
             this.insertMultipleMenuItem.Name = "insertMultipleMenuItem";
-            this.insertMultipleMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.insertMultipleMenuItem.Text = "Insert Frames...";
+            this.insertMultipleMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.insertMultipleMenuItem.Text = "Insert Inputs...";
             this.insertMultipleMenuItem.Click += new System.EventHandler(this.insertMultipleMenuItem_Click);
             // 
             // deleteMenuItem
             // 
             this.deleteMenuItem.Name = "deleteMenuItem";
             this.deleteMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.deleteMenuItem.Text = "Delete Selected Frame(s)";
+            this.deleteMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.deleteMenuItem.Text = "Delete Selected Input(s)";
             this.deleteMenuItem.Click += new System.EventHandler(this.deleteMenuItem_Click);
             // 
             // clearSelectedValuesToolStripMenuItem
             // 
             this.clearSelectedValuesToolStripMenuItem.Name = "clearSelectedValuesToolStripMenuItem";
-            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.clearSelectedValuesToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.clearSelectedValuesToolStripMenuItem.Text = "Clear Selected Values";
             this.clearSelectedValuesToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedValuesToolStripMenuItem_Click);
             // 
@@ -554,6 +554,7 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.viewInDolphinToolStripMenuItem,
             this.fileInfoToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -623,7 +624,7 @@
             this.selectedFrameBox.Size = new System.Drawing.Size(786, 186);
             this.selectedFrameBox.TabIndex = 6;
             this.selectedFrameBox.TabStop = false;
-            this.selectedFrameBox.Text = "Selected Frame";
+            this.selectedFrameBox.Text = "Selected Input";
             // 
             // tableLayoutPanel1
             // 
@@ -949,19 +950,6 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "X-Axis";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.trackBar1.Location = new System.Drawing.Point(0, 0);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar1.Maximum = 255;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(158, 45);
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.Value = global::pianokeys.Properties.Settings.Default.LeftStickX;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
             // 
             // trackBar2
             // 
@@ -1474,6 +1462,26 @@
             this.saveFileDialog1.DefaultExt = "dtm";
             this.saveFileDialog1.Filter = "Dolphin TAS Movie|*.dtm";
             // 
+            // trackBar1
+            // 
+            this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.activeFrameBindingSource, "LX", true));
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.trackBar1.Location = new System.Drawing.Point(0, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar1.Maximum = 255;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(158, 45);
+            this.trackBar1.TabIndex = 0;
+            this.trackBar1.Value = 128;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.SliderValueChanged);
+            // 
+            // viewInDolphinToolStripMenuItem
+            // 
+            this.viewInDolphinToolStripMenuItem.Name = "viewInDolphinToolStripMenuItem";
+            this.viewInDolphinToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.viewInDolphinToolStripMenuItem.Text = "View in Emulator";
+            this.viewInDolphinToolStripMenuItem.Click += new System.EventHandler(this.viewInDolphinToolStripMenuItem_Click);
+            // 
             // activeFrameBindingSource
             // 
             this.activeFrameBindingSource.DataSource = typeof(pianokeys.Frame);
@@ -1515,7 +1523,6 @@
             this.tableLayoutPanel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -1537,6 +1544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameNavigator)).EndInit();
             this.frameNavigator.ResumeLayout(false);
             this.frameNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeFrameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1653,6 +1661,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewInDolphinToolStripMenuItem;
     }
 }
 
